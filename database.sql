@@ -11,7 +11,7 @@ CREATE TABLE user
     firstname VARCHAR(255) NOT NULL,
     lastname  VARCHAR(255) NOT NULL,
     birthdate DATE         NOT NULL,
-    email     VARCHAR(255) UNIQUE ,
+    email     VARCHAR(255) UNIQUE,
     address   VARCHAR(255),
     wallet    INTEGER,
     password  VARCHAR(255)
@@ -19,11 +19,11 @@ CREATE TABLE user
 
 CREATE TABLE transaction
 (
-    `transaction_id`     INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    `sender_user_id`     INTEGER NOT NULL REFERENCES user (user_Id),
-    `receiving_user_id`  INTEGER NOT NULL REFERENCES user (user_Id),
-    `transaction_date`   DATE    NOT NULL,
-    `transaction_amount` INTEGER NOT NULL
+    transaction_id     INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    sender_user_id     INTEGER NOT NULL REFERENCES user (user_Id),
+    receiving_user_id  INTEGER NOT NULL REFERENCES user (user_Id),
+    transaction_date   DATE    NOT NULL,
+    transaction_amount INTEGER NOT NULL
 );
 
 CREATE TABLE user_user

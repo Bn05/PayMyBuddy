@@ -1,6 +1,7 @@
 package com.paymybuddy.paymybuddy.controller;
 
 import com.paymybuddy.paymybuddy.exceptions.ContactNoExistException;
+import com.paymybuddy.paymybuddy.exceptions.UserAlreadyExistException;
 import com.paymybuddy.paymybuddy.model.User;
 import com.paymybuddy.paymybuddy.service.ContactService;
 import com.paymybuddy.paymybuddy.service.UserService;
@@ -24,11 +25,14 @@ public class ContactController {
         return contactService.getContacts(id);
     }
 
+   // TODO : Deja dans la liste des contacts.
     @PostMapping(value = "/contact")
-    public void addContact(@RequestParam(value = "userId") int userId, @RequestParam(value = "contactEmail") String contactEmail) {
+    public User addContact(@RequestParam(value = "userId") int userId, @RequestParam(value = "contactEmail") String contactEmail) {
         User contact = userService.getUserByEmail(contactEmail);
         if (contact != null) {
-            contactService.addContact(userId, contact.getUserId());
+             return contactService.addContact(userId, contact.getUserId());
         } else throw new ContactNoExistException("Le contact n'existe pas");
     }
+
+    //TODO : Supprimer un contact avec ses erreurs
 }

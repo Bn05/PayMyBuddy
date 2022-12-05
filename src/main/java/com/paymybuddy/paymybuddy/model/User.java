@@ -37,14 +37,6 @@ public class User {
     @JsonIgnore
     private String password;
 
-    public List<User> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(List<User> contacts) {
-        this.contacts = contacts;
-    }
-
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_user",
@@ -117,6 +109,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<User> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<User> contacts) {
+        this.contacts = contacts;
     }
 
 }

@@ -19,8 +19,10 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public User getUserByEmail(String email){
-        return userRepository.findByEmail(email).get();
+    public User getUserByEmail(String email) {
+
+        Optional<User> searchResult = userRepository.findByEmail(email);
+        return searchResult.orElse(null);
     }
 
     public Iterable<User> getUsers() {
@@ -30,11 +32,6 @@ public class UserService {
     public User saveUser(User user) {
         return userRepository.save(user);
     }
-
-    public User updateUser(User user) {
-        return userRepository.save(user);
-    }
-
 
     public void deleteUser(int id) {
         userRepository.deleteById(id);

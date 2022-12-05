@@ -21,7 +21,7 @@ public class ContactService {
     }
 
 
-    public void addContact (int userId, int contactId){
+    public User addContact (int userId, int contactId){
         User user = userRepository.findById(userId).get();
         User contact = userRepository.findById(contactId).get();
 
@@ -29,5 +29,6 @@ public class ContactService {
         contacts.add(contact);
 
         userRepository.save(user);
+        return contact ;
     }
 }
