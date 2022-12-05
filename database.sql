@@ -11,7 +11,7 @@ CREATE TABLE user
     firstname VARCHAR(255) NOT NULL,
     lastname  VARCHAR(255) NOT NULL,
     birthdate DATE         NOT NULL,
-    email     VARCHAR(255),
+    email     VARCHAR(255) UNIQUE ,
     address   VARCHAR(255),
     wallet    INTEGER,
     password  VARCHAR(255)
@@ -19,22 +19,20 @@ CREATE TABLE user
 
 CREATE TABLE transaction
 (
-    transaction_id     INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    senderUser_id      INTEGER NOT NULL,
-    receivingUser_id   INTEGER NOT NULL,
-    transaction_date   DATE    NOT NULL,
-    transaction_amount INTEGER NOT NULL,
-    FOREIGN KEY (senderUser_id) REFERENCES user (user_id),
-    FOREIGN KEY (receivingUser_id) REFERENCES user (user_id)
+    `transaction_id`     INTEGER NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `sender_user_id`     INTEGER NOT NULL REFERENCES user (user_Id),
+    `receiving_user_id`  INTEGER NOT NULL REFERENCES user (user_Id),
+    `transaction_date`   DATE    NOT NULL,
+    `transaction_amount` INTEGER NOT NULL
 );
 
 CREATE TABLE user_user
 (
-    mainUser_id    INTEGER NOT NULL,
-    contactUser_id INTEGER NOT NULL,
-    PRIMARY KEY (mainUSer_id, contactUser_id),
-    FOREIGN KEY (mainUser_id) REFERENCES user (user_id),
-    FOREIGN KEY (contactUser_id) REFERENCES user (user_id)
+    main_user_id    INTEGER NOT NULL,
+    contact_user_id INTEGER NOT NULL,
+    PRIMARY KEY (main_user_id, contact_user_id),
+    FOREIGN KEY (main_user_id) REFERENCES user (user_Id),
+    FOREIGN KEY (contact_user_id) REFERENCES user (user_Id)
 );
 
 
@@ -44,15 +42,16 @@ INSERT INTO user (firstName, lastName, birthdate, email, address, wallet, passwo
     ('Louis', 'Dupuis', '1980-06-30', 'louisdupuis@yopmail.com', 'Paris', 250, '1234')
 ;
 
-INSERT INTO transaction(senderUser_id, receivingUser_id, transaction_date, transaction_amount)
+INSERT INTO transaction(sender_user_id, receiving_user_id, transaction_date, transaction_amount)
     VALUE (1, 2, '2022-01-01', 25),
     (1, 3, '2022-02-05', 50),
     (3, 1, '2022-12-04', 75)
 ;
 
-INSERT INTO user_user (mainUser_id, contactUser_id)
+INSERT INTO user_user (main_user_id, contact_user_id)
     VALUE (1, 2),
-    (1, 3)
-;
+    (1, 3),
+    (2, 1),
+    (3, 1);
 
 
