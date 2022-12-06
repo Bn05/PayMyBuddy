@@ -1,6 +1,7 @@
 package com.paymybuddy.paymybuddy.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import org.hibernate.annotations.DynamicUpdate;
 
@@ -15,7 +16,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_Id")
+    @Column(name = "user_id")
     private int userId;
 
     @Column(name = "firstname")
@@ -34,7 +35,8 @@ public class User {
 
     private int wallet;
 
-    @JsonIgnore
+    //TODO / Ajouter ecriture cf Docteur casa
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

@@ -37,9 +37,9 @@ CREATE TABLE user_user
 
 
 INSERT INTO user (firstName, lastName, birthdate, email, address, wallet, password)
-    VALUE ('Bertrand', 'NOEL', '1992-03-10', 'bertrandnoel@gmail.com', 'Toulouse', 50, 'password'),
-    ('Paul', 'Dupon', '2000/01-01', 'pauldupon@gmail.com', 'Lille', 100, 'AZERTY'),
-    ('Louis', 'Dupuis', '1980-06-30', 'louisdupuis@yopmail.com', 'Paris', 250, '1234')
+    VALUE ('Bertrand', 'NOEL', '1992-03-10', 'bertrandnoel@gmail.com', 'Toulouse', 50, '$2y$10$9Qw2gl8TBJXQtMLIjkG1/enQbDsPrMS0EGzaEvtuYRPCcMiFq8cKG'),
+    ('Paul', 'Dupon', '2000/01-01', 'pauldupon@gmail.com', 'Lille', 100, '$2y$10$pxhUkG/LqrhAJtjx9UcLH.Ig7vSIxMHiyM63blHKnFcKxT4Cn61D.'),
+    ('Louis', 'Dupuis', '1980-06-30', 'louisdupuis@yopmail.com', 'Paris', 250, '$2y$10$RfkM5je7fc/h..vVG2qFn.ozFVSSFTfS45G9n7LEhFufOD1XZ41Sy')
 ;
 
 INSERT INTO transaction(sender_user_id, receiving_user_id, transaction_date, transaction_amount)

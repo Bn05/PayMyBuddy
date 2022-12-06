@@ -1,34 +1,27 @@
 package com.paymybuddy.paymybuddy.controller;
 
-import com.nimbusds.jose.util.Base64URL;
-import com.paymybuddy.paymybuddy.exceptions.ContactNoExistException;
 import com.paymybuddy.paymybuddy.exceptions.UserAlreadyExistException;
 import com.paymybuddy.paymybuddy.model.User;
 import com.paymybuddy.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Base64;
-import java.util.Optional;
-
 @RestController
 public class UserController {
 
+        @Autowired
         private UserService userService;
-
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping(value = "/user")
     public User getUsers(@RequestParam(value = "id") int id) {
         return userService.getUser(id);
     }
 
+   // TODO / MDP pas enregistrer quand création
     @PostMapping(value = "/user")
     public User addUser(@RequestBody User user) {
         String userMail = user.getEmail();
-        User userAlreadyExist = userService.getUserByEmail(userMail);
+        User userAlreadyExist = userService.findUserByEmail(userMail);
 
         if (userAlreadyExist == null) {
             return userService.saveUser(user);
@@ -51,5 +44,10 @@ public class UserController {
     @GetMapping(value = "/users")
     public Iterable<User> getUsers() {
         return userService.getUsers();
+    }
+
+    @GetMapping(value = "/login?error=true")
+    public String failConnextion (){
+        return "Fail connexion!";
     }
 }
