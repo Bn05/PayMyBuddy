@@ -26,7 +26,7 @@ public class WalletService {
         return userWallet;
     }
 
-    // TODO : Wallet int -> double ou float
+    // TODO: Wallet int -> double ou float
 
     public int transfertMoneyToBank(int userId, int amountTransaction) {
         User user = userRepository.findById(userId).get();

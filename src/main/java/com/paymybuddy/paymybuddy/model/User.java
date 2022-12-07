@@ -35,7 +35,6 @@ public class User {
 
     private int wallet;
 
-    //TODO / Ajouter ecriture cf Docteur casa
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 

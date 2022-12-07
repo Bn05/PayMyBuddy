@@ -27,14 +27,19 @@ public class UserService {
     public User findUserByFirstName(String firstName){return userRepository.findByFirstName(firstName).get();}
 
     public User findUserByEmail(String email) {
-
         Optional<User> searchResult = userRepository.findByEmail(email);
         return searchResult.orElse(null);
     }
 
-    public Iterable<User> getUsers() {
+    public User findUserById (int id){
+        Optional<User> searchResult = userRepository.findById(id);
+        return searchResult.orElse(null);
+    }
+
+    public Iterable<User> findUsers() {
         return userRepository.findAll();
     }
+
 
     public User saveUser(User user) {
         String password = user.getPassword();

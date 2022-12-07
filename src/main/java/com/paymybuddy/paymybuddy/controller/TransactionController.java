@@ -6,6 +6,7 @@ import com.paymybuddy.paymybuddy.service.TransactionService;
 import com.paymybuddy.paymybuddy.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +22,7 @@ public class TransactionController {
     WalletService walletService;
 
     @GetMapping(value = "/transaction")
-    public Iterable<Transaction> getTransaction() {
+    public Iterable<Transaction> getTransaction(Authentication authentication) {
         return transactionService.getTransaction();
     }
 

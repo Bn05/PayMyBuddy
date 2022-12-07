@@ -1,6 +1,9 @@
 package com.paymybuddy.paymybuddy.service;
 
+
+import com.paymybuddy.paymybuddy.model.SecurityUser;
 import com.paymybuddy.paymybuddy.model.User;
+import com.paymybuddy.paymybuddy.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,11 +16,23 @@ import java.util.Collections;
 public class JpaUserDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserService userService;
+    private UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-       User user = userService.findUserByEmail(email);
-      return new org.springframework.security.core.userdetails.User(user.getFirstName(),user.getPassword(),Collections.emptyList());
+
+        // TODO : Ajout gestion des erreurs UserName notFoundException
+     /* return (UserDetails) userRepository
+                .findByEmail(email)
+                .map(SecurityUser::new)
+                .orElseThrow(() -> new UsernameNotFoundException("User not Found"));
+
+      */
+
+        User user = userRepository.findByEmail(email).get();
+        SecurityUser secUser = new SecurityUser(user);
+        return secUser;
+
+
     }
 }

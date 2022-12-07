@@ -4,20 +4,21 @@ import com.paymybuddy.paymybuddy.exceptions.UserAlreadyExistException;
 import com.paymybuddy.paymybuddy.model.User;
 import com.paymybuddy.paymybuddy.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
 
-        @Autowired
-        private UserService userService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping(value = "/user")
     public User getUsers(@RequestParam(value = "id") int id) {
         return userService.getUser(id);
     }
 
-   // TODO / MDP pas enregistrer quand création
+
     @PostMapping(value = "/user")
     public User addUser(@RequestBody User user) {
         String userMail = user.getEmail();
@@ -29,10 +30,15 @@ public class UserController {
 
     }
 
-   // TODO : empecher la créeation depuis put & Erreur si USer n'existe pas ou mauvaise id
+    // TODO : empecher la créeation depuis put & Erreur si USer n'existe pas ou mauvaise id
     @PutMapping(value = "/user")
-    public User updateUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    public User updateUser(@RequestBody User user, Authentication authentication) {
+
+        System.out.println("test");
+
+
+            return userService.saveUser(user);
+
     }
 
     // TODO :  Erreur si suppresion UserNoExist
@@ -42,12 +48,12 @@ public class UserController {
     }
 
     @GetMapping(value = "/users")
-    public Iterable<User> getUsers() {
-        return userService.getUsers();
+    public Iterable<User> getUsers(Authentication authentication) {
+        return userService.findUsers();
     }
 
     @GetMapping(value = "/login?error=true")
-    public String failConnextion (){
+    public String failConnextion() {
         return "Fail connexion!";
     }
 }
