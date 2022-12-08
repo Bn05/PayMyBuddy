@@ -16,9 +16,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+
+    // TODO : ajouter encoder dans la class main + ajout Autowired
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 
     public User getUser(int id) {
         return userRepository.findById(id).get();

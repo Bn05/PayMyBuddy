@@ -47,7 +47,6 @@ public class User {
     @JsonIgnore
     private List<User> contacts = new ArrayList<>();
 
-
     public int getUserId() {
         return userId;
     }

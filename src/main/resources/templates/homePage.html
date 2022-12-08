@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
+<body>
+
+<h1>WELCOME !! </h1>
+
+<div>
+    <h3>Send Money</h3>
+    <a href="/addConnection"><button>Add Connection</button></a>
+</div>
+
+<div id="Transactions">
+    <fieldset>
+        <legend>Mes Transactions</legend>
+
+        <table>
+            <thead>
+            <tr>
+                <th> Destinataire</th>
+                <th> Date</th>
+                <th> Amount</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if ="${transactions.empty}">
+                <td colspan="3">Aucune transaction</td>
+            </tr>
+            <tr th:each="transaction : ${transactions}">
+                <td><span th:text="${transaction.receivingUser.firstName}">Recever</span></td>
+                <td><span th:text="${transaction.transactionDate}">Date</span></td>
+                <td><span th:text="${transaction.amount}">Amount</span></td>
+            </tr>
+            </tbody>
+        </table>
+    </fieldset>
+</div>
+
+
+<table border ="1">
+    <thead>
+    <tr>
+        <th> Destinataire</th>
+        <th> Date</th>
+        <th> Amount</th>
+    </thead>
+    <tbody>
+    <tr th:each="transaction, iStat : ${transactionPage.content}">
+        <td><span th:text="${transaction.receivingUser.firstName}">Destinataire</span></td>
+        <td><span th:text="${transaction.transactionDate}">Date</span></td>
+        <td><span th:text="${transaction.amount}">Amount</span></td>
+    </tr>
+    </tbody>
+</table>
+<div th:if = "${transactionPage.totalPages > 0}" class="pagination" th:each="pageNumbers : ${pageNumbers}">
+    <a th:href="@{/homePage(size=${transactionPage.size}, page=${pageNumbers})}"
+    th:text=${pageNumber}
+    th:class="${pageNumbers==transactionPage.number + 1} ? active"></a>
+
+</div>
+
+</body>
+</html>

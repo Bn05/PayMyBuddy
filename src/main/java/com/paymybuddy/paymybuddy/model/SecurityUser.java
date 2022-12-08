@@ -10,6 +10,12 @@ import java.util.Collections;
 public class SecurityUser implements UserDetails {
 
 
+
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     private User user;
 
     public SecurityUser(User user) {
@@ -50,5 +56,9 @@ public class SecurityUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

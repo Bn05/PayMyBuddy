@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Creation Compte</title>
+</head>
+<body>
+
+<h1>Creation de compte</h1>
+
+<form method="post" th:action="@{/saveUser}" th:object="${user}">
+  <label > firstName </label>
+  <input type="text" th:field="*{firstName}"><br>
+  <label > lastName </label>
+  <input type="text" th:field="*{lastName}"><br>
+  <label > birthdate </label>
+  <input type="date" th:field="*{birthdate}"><br>
+  <label > email </label>
+  <input type="email" th:field="*{email}"><br>
+  <label > address </label>
+  <input type="text" th:field="*{address}"><br>
+  <label > wallet </label>
+  <input type="number" th:field="*{wallet}"><br>
+  <label > password </label>
+  <input type="password" th:field="*{password}"><br>
+  <button type="submit">Créer</button>
+</form>
+
+</body>
+</html>
