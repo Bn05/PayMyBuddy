@@ -38,19 +38,19 @@ public class TransactionService {
         return transactionRepository.save(transaction);
     }
 
-    public Transaction addTransaction(int senderUserId, int receivingUserId, int transactionAmount) {
+    public Transaction addTransaction(Transaction transaction) {
 
-        User senderUser = userRepository.findById(senderUserId).get();
-        senderUser.setWallet(senderUser.getWallet() - transactionAmount);
+        User senderUser = transaction.getSenderUser();
+        User receverUser = transaction.getReceivingUser();
+        int amountTransaction = transaction.getAmount();
+
+        senderUser.setWallet(senderUser.getWallet() - amountTransaction);
         userRepository.save(senderUser);
 
-        User receivingUser = userRepository.findById(receivingUserId).get();
-        receivingUser.setWallet(receivingUser.getWallet() + transactionAmount);
-        userRepository.save(receivingUser);
+        receverUser.setWallet(receverUser.getWallet() + amountTransaction);
+        userRepository.save(receverUser);
 
-        Transaction transaction = new Transaction(senderUser, receivingUser, LocalDate.now(), transactionAmount);
         return transactionRepository.save(transaction);
-
     }
 
 
@@ -58,14 +58,13 @@ public class TransactionService {
 
         Iterable<Transaction> transactionIterable = transactionRepository.findAll();
         List<Transaction> transactions = new ArrayList<>();
-
         for (Transaction transaction : transactionIterable) {
             transactions.add(transaction);
         }
 
         int pageSize = pageable.getPageSize();
-        int curretPage = pageable.getPageNumber();
-        int startItem = curretPage * pageSize;
+        int currentPage = pageable.getPageNumber();
+        int startItem = currentPage * pageSize;
 
         List<Transaction> list;
 
@@ -76,7 +75,7 @@ public class TransactionService {
             list = transactions.subList(startItem, toIndex);
         }
 
-        Page<Transaction> transactionPage = new PageImpl<Transaction>(list, PageRequest.of(curretPage, pageSize), transactions.size());
+        Page<Transaction> transactionPage = new PageImpl<Transaction>(list, PageRequest.of(currentPage, pageSize), transactions.size());
 
         return transactionPage;
     }

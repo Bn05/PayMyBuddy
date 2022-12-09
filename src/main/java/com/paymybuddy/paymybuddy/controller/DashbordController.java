@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -29,24 +31,43 @@ public class DashbordController {
     @RequestMapping(value = "/homePage")
     public String homePage(Authentication authentication,
                            Model model,
-                           @RequestParam("page") int page,
-                           @RequestParam("size") int size) {
+                           @RequestParam("page") Optional<Integer> page,
+                           @RequestParam("size") Optional<Integer> size) {
 
+        //Security Param ///
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
         User user = securityUser.getUser();
 
-        Page<Transaction> transactionPage = transactionService.findTransactionPage(PageRequest.of(page, size));
+        // End of Security Param //
 
+        //Send Money//
+        List<User> contacts = user.getContacts();
+        model.addAttribute("contacts", contacts);
+
+        Transaction transactionRequest = new Transaction();
+        model.addAttribute("transactionRequest", transactionRequest);
+
+
+        // END OF SEND MONEY//
+
+
+        // Transaction LIST Start ////
+        int currentPage = page.orElse(1);
+        int pageSize = size.orElse(1);
+
+        Page<Transaction> transactionPage = transactionService.findTransactionPage(PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("transactionPage", transactionPage);
 
         int totalPages = transactionPage.getTotalPages();
-        if(totalPages>0){
-            List<Integer> pageNumbers = IntStream.rangeClosed(1,totalPages)
+        if (totalPages > 0) {
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
                     .boxed()
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
+
+        //// End Of Transaction////
 
 
         return "homePage";

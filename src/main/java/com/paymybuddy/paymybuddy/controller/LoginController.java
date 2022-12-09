@@ -40,21 +40,5 @@ public class LoginController {
         return "home";
     }
 
-    @RequestMapping(value = "/test")
-    public String test(Model model) {
-
-        Iterable<Transaction> transactions = transactionService.getTransaction();
-        model.addAttribute("trans", transactions);
-
-        Iterable<User> users = userService.findUsers();
-        model.addAttribute("employees", users);
-        return "test";
-    }
-
-
-
-
-
-
 
 }
