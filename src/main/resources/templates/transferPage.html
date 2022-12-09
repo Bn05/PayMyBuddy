@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transfer Page</title>
+</head>
+<body>
+<header>
+    <div id="logo"> Pay My Buddy</div>
+    <div id="menu">
+        <ul>
+            <li><a href="/homePage">Home</a></li>
+            <li><a href="/transferPage"> Transfer</a></li>
+            <li><a href="/profilePage"> Profile </a></li>
+            <li><a href="/contactPage">Contact </a></li>
+            <li><a href="/logout">Log off </a></li>
+
+        </ul>
+    </div>
+    <div id="path">Home / Transfer</div>
+</header>
+
+<section>
+    <div>
+        <h3>Send Money</h3>
+        <a href="/contactPage">
+            <button>Add Connection</button>
+        </a>
+    </div>
+    <div id="sendMoney">
+        <form th:action="@{/addTransaction}">
+
+
+            <label>
+                <select name="contact" id="contact-select" required>
+                    <option value="" th:disabled="disabled" selected>Select a Connection</option>
+                    <option th:each="contact : ${contacts}" th:text="${contact.firstName}"
+                            th:value="${contact.userId}"></option>
+                </select>
+            </label>
+            <label for="amount"></label>
+            <input type="number" id="amount" name="amount" min="1" required/>
+            <button type="submit">Pay</button>
+        </form>
+    </div>
+
+
+    <div id="myTransactions">
+        <fieldset>
+            <legend> Mes transactions</legend>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th> Destinataire</th>
+                    <th> Date</th>
+                    <th> Amount</th>
+                </thead>
+                <tbody>
+                <tr th:each="transaction, iStat : ${transactionPage.content}"
+                    th:style="${iStat.odd}? 'font-weight: bold;'"
+                    th:alt-title="${iStat.even}? 'even' : 'odd'">
+                    <td th:text="${transaction.receivingUser.firstName}"/>
+                    <td th:text="${transaction.transactionDate}"/>
+                    <td th:text="${transaction.amount}"/>
+                </tr>
+                </tbody>
+            </table>
+            <div th:if="${transactionPage.totalPages > 0}" class="pagination"
+                 th:each="pageNumber : ${pageNumbers}">
+                <a th:href="@{/transferPage(size=${transactionPage.size}, page=${pageNumber})}"
+                   th:text=${pageNumber}
+                   th:class="${pageNumber==transactionPage.number + 1} ? active"></a>
+            </div>
+        </fieldset>
+    </div>
+</section>
+</body>
+</html>

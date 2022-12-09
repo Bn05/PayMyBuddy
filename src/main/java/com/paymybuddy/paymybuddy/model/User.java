@@ -3,13 +3,17 @@ package com.paymybuddy.paymybuddy.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.validation.annotation.Validated;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Validated
 @DynamicUpdate
 @Table(name = "user")
 public class User {
@@ -19,9 +23,15 @@ public class User {
     @Column(name = "user_id")
     private int userId;
 
+
+    @NotBlank(message = "donne ton nom connard")
+    @Size(min = 2, max = 10)
+
     @Column(name = "firstname")
     private String firstName;
 
+    @NotBlank(message = "ouf guedin")
+    @Size(min = 2, max = 10, message = "")
     @Column(name = "lastname")
     private String lastName;
 

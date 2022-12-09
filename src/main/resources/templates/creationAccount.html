@@ -8,9 +8,11 @@
 
 <h1>Creation de compte</h1>
 
-<form method="post" th:action="@{/saveUser}" th:object="${user}">
+<form method="post" th:action="@{/creationAccount}" th:object="${user}">
+  <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}"></p>
   <label > firstName </label>
   <input type="text" th:field="*{firstName}"><br>
+  <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"></p>
   <label > lastName </label>
   <input type="text" th:field="*{lastName}"><br>
   <label > birthdate </label>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Page</title>
+</head>
+<body>
+<header>
+    <div id="logo"> Pay My Buddy</div>
+    <div id="menu">
+        <ul>
+            <li><a href="/homePage">Home</a></li>
+            <li><a href="/transferPage"> Transfer</a></li>
+            <li><a href="/profilePage"> Profile </a></li>
+            <li><a href="/contactPage">Contact </a></li>
+            <li><a href="/logout">Log off </a></li>
+
+        </ul>
+        <div id="path">Home / Contact</div>
+    </div>
+</header>
+<section>
+    <h2>Add Connection</h2>
+    <div id="addConnection">
+
+
+
+        <form th:action="@{/addContact(email='email1')}" >
+
+            <input type="email" id="email" name="email" required/>
+            <button type="submit">Add Contact</button>
+
+        </form>
+
+
+    </div>
+
+
+</section>
+</body>
+</html>

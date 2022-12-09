@@ -23,9 +23,6 @@ public class TransactionService {
     @Autowired
     private TransactionRepository transactionRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
     public Iterable<Transaction> getTransaction() {
         return transactionRepository.findAll();
     }
@@ -34,25 +31,9 @@ public class TransactionService {
         return transactionRepository.findTransactionBySenderUser(user);
     }
 
-    public Transaction addTransactionWebApp(Transaction transaction) {
-        return transactionRepository.save(transaction);
-    }
-
     public Transaction addTransaction(Transaction transaction) {
-
-        User senderUser = transaction.getSenderUser();
-        User receverUser = transaction.getReceivingUser();
-        int amountTransaction = transaction.getAmount();
-
-        senderUser.setWallet(senderUser.getWallet() - amountTransaction);
-        userRepository.save(senderUser);
-
-        receverUser.setWallet(receverUser.getWallet() + amountTransaction);
-        userRepository.save(receverUser);
-
         return transactionRepository.save(transaction);
     }
-
 
     public Page<Transaction> findTransactionPage(Pageable pageable) {
 

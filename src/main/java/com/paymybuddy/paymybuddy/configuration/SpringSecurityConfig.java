@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
 @Configuration
@@ -33,15 +34,17 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/creationAccount", "/saveUser","/validateCreationAccount").permitAll()
+                .requestMatchers("/creationAccount", "/saveUser","/validateCreationAccount", "/TESTcontactPAGE").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()
                 .successForwardUrl("/homePage")
                 .and()
                 .userDetailsService(jpaUserDetailsService)
+                .logout()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                .and()
                 .build();
     }
 
