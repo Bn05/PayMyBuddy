@@ -10,13 +10,10 @@ import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -38,17 +35,15 @@ public class SecurityController {
 
         model.addAttribute("user", user);
 
-        return "creationAccount";    }
+        return "creationAccount";
+    }
 
     @PostMapping(value = "/creationAccount")
     public String saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
 
-
-
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "/creationAccount";
         }
-
         userService.saveUser(user);
         return ("redirect:/validateCreationAccount");
     }
@@ -59,10 +54,10 @@ public class SecurityController {
     }
 
     @GetMapping(value = "/logoutfrfrf")
-    public String logout()
-    {return "/logout";}
-
-
+    public String logout() {
+        return "/logout";
+        // TODO : A VALIDER
+    }
 
 
 }

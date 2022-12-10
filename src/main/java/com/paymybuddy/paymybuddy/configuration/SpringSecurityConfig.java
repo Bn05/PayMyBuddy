@@ -36,6 +36,7 @@ public class SpringSecurityConfig {
         return http
                 .authorizeHttpRequests()
                 .requestMatchers("/creationAccount", "/saveUser","/validateCreationAccount", "/TESTcontactPAGE").permitAll()
+                .requestMatchers("/adminPage").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()

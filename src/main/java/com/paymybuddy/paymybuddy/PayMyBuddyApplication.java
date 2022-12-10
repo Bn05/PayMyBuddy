@@ -30,7 +30,6 @@ public class PayMyBuddyApplication implements CommandLineRunner {
         // TODO: transferer de l'argent à la banque
         // TODO: gestion ajout contact _deja en contact _pas client  _moi meme
         // TODO: ajout commentaire transaction
-        // TODO: ajout role
         // TODO: ajout de la liste de connection
         // TODO: page profil
         // TODO: page home
@@ -45,5 +44,9 @@ public class PayMyBuddyApplication implements CommandLineRunner {
         // TODO: jacoco
         // TODO: pom.xml
         // TODO: oath2
+        // TODO : affiner VARCHAR
+        // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin
+
+
     }
 }

@@ -7,9 +7,9 @@ import jakarta.validation.constraints.*;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.validation.annotation.Validated;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -56,6 +56,14 @@ public class User {
     )
     @JsonIgnore
     private List<User> contacts = new ArrayList<>();
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Collection<Role> roles = new ArrayList<>();
 
     public int getUserId() {
         return userId;
@@ -129,4 +137,15 @@ public class User {
         this.contacts = contacts;
     }
 
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
+    public void setRole(Role role) {
+        roles.add(role);
+    }
 }

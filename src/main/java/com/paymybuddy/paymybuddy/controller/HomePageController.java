@@ -2,6 +2,7 @@ package com.paymybuddy.paymybuddy.controller;
 
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,17 +25,12 @@ public class HomePageController {
         return "TESTcontactPAGE";
     }
 
-
-@RequestMapping(value = "/addTest")
-    public ModelAndView addTest (@RequestParam(value = "pets") String pet,
-            @RequestParam(value = "amount")int amount){
-
-
-        int amountvalidation = amount;
-        String validationpets = pet;
+    @GetMapping(value = "/adminPage")
+    public String adminPage(){
+        return "/adminPAge";
+    }
 
 
-    return new ModelAndView("redirect:/TESTcontactPAGE");
-}
+
 
 }
