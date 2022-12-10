@@ -26,27 +26,35 @@ public class PayMyBuddyApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         //TODO :  Wallet int -> double ou float
-        // TODO: ajout de l'argent depuis la banque
-        // TODO: transferer de l'argent à la banque
+
+        // TODO: ajout de l'argent depuis la banque // RESTE la logique
+        // TODO: transferer de l'argent à la banque // RESTE la logique
+
         // TODO: gestion ajout contact _deja en contact _pas client  _moi meme
+
         // TODO: ajout commentaire transaction
+        //TODO : Transaction IN et OUT
         // TODO: ajout de la liste de connection
-        // TODO: page profil
+
         // TODO: page home
-        // TODO: erreur si mauvaise information page d'inscription
-        // TODO: gestion de la deconnexion
+        // TODO: erreur si mauvaise information page d'inscription & page modification profil
+
+
         // TODO: test unitaire
         // TODO: test d'integration
-        // TODO: test end to end
+
         // TODO: javadoc
         // TODO: readme
         // TODO: spotbug
         // TODO: jacoco
         // TODO: pom.xml
-        // TODO: oath2
+
+
+        // TODO: gestion de la deconnexion
+        // TODO: test end to end
         // TODO : affiner VARCHAR
         // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin
 
-
+        // TODO: oath2
     }
 }

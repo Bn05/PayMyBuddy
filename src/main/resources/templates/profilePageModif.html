@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>profilePageModif</title>
+</head>
+<body>
+<header>
+    <div id="logo"> Pay My Buddy</div>
+    <div id="menu">
+        <ul>
+            <li><a href="/homePage">Home</a></li>
+            <li><a href="/transferPage"> Transfer</a></li>
+            <li><a href="/profilePage"> Profile </a></li>
+            <li><a href="/contactPage">Contact </a></li>
+            <li><a href="/logout">Log off </a></li>
+
+        </ul>
+    </div>
+    <div id="path">Home / Profile</div>
+</header>
+<div id="myInfo">
+    <form method="post" th:action="@{/updateAccount}" th:object="${user}">
+        <ul>
+            <li>
+                <label for="firstName">FirstName : </label><input type="text" placeholder="Bertand"
+                                                                  th:field="*{firstName}"
+            >
+            </li>
+            <li>
+                <label for="lastName"></label>LastName : <input type="text" th:field="*{lastName}"
+                                                                th:placeholder="${user.lastName}"
+            >
+            </li>
+            <li>
+                <label for="birthdate"></label>Birthdate : <input type="text" th:placeholder="${birthdate}"
+                                                                  onfocus="(this.type='date')" th:field="*{birthdate}"
+
+            >
+            </li>
+
+            <li>
+                <label for="email"></label>Email : <input type="email" th:field="*{email}"
+                                                          th:placeholder="${user.email}">
+            </li>
+            <li>
+                <label for="address"></label>Address : <input type="text" th:field="*{address}"
+                                                              th:placeholder="${user.address}">
+            </li>
+            <li>
+                <label for="password"></label>Password : <input type="password" th:field="*{password}">
+            </li>
+        </ul>
+        <button type="submit">Valider</button>
+    </form>
+
+    <form action="/profilePage" method="get">
+        <input type="submit" value="Annuler">
+    </form>
+
+
+</div>
+
+
+</body>
+</html>

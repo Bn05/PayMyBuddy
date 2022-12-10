@@ -27,7 +27,7 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public Optional<User> getUserByEmail(String email){
+    public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -42,7 +42,16 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void updateUser (User user){
+    public void updateUser(User user) {
+        userRepository.save(user);
+    }
+
+
+    public void updateUserWithPassword(User user) {
+        String password = user.getPassword();
+        String passwordBcrypt = passwordEncoder().encode(password);
+        user.setPassword(passwordBcrypt);
+
         userRepository.save(user);
     }
 

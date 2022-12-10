@@ -86,9 +86,8 @@ public class TransferPageController {
                                       ) {
 
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-
-
         User senderUser = securityUser.getUser();
+
         User receivingUser = userService.getUser(receivingUserId);
 
         Transaction transactionRequest = new Transaction();
