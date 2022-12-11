@@ -25,16 +25,12 @@ public class PayMyBuddyApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        //TODO :  Wallet int -> double ou float
-
-        // TODO: ajout de l'argent depuis la banque // RESTE la logique
-        // TODO: transferer de l'argent à la banque // RESTE la logique
-
-        // TODO: gestion ajout contact _deja en contact _pas client  _moi meme
 
         // TODO: ajout commentaire transaction
         //TODO : Transaction IN et OUT
-        // TODO: ajout de la liste de connection
+        //TODO :  Wallet int -> double ou float
+        // TODO : Ajouter commission de 5%
+
 
         // TODO: page home
         // TODO: erreur si mauvaise information page d'inscription & page modification profil
@@ -48,6 +44,8 @@ public class PayMyBuddyApplication implements CommandLineRunner {
         // TODO: spotbug
         // TODO: jacoco
         // TODO: pom.xml
+        //TODO : supprimer AUTORWIRED
+        //TODO : refactoriser code !!
 
 
         // TODO: gestion de la deconnexion

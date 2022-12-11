@@ -24,14 +24,40 @@
     <div id="addConnection">
 
 
-
-        <form th:action="@{/addContact(email='email1')}" >
-
+        <form th:action="@{/addContact(email='email1')}">
+            <div th:if="${alwaysYourContact}"> Cette personne est déjà dans vos contacts</div>
+            <div th:if="${noCustomer}"> Cette personne n'est pas encore inscrite à notre service. N'hésitez pas à
+                l'inviter :)
+            </div>
             <input type="email" id="email" name="email" required/>
             <button type="submit">Add Contact</button>
 
         </form>
+    </div>
 
+    <div id="myContact">
+        <fieldset>
+            <legend> Mes contacts</legend>
+            <table>
+                <thead>
+                <tr>
+                    <th> Nom</th>
+                    <th> Prenom</th>
+                    <th> Email</th>
+                </thead>
+                <tbody>
+                <tr th:each="contact : ${userContacts}">
+                    <td th:text="${contact.firstName}"/>
+                    <td th:text="${contact.lastName}"/>
+                    <td th:text="${contact.email}"/>
+
+
+                </tr>
+
+
+                </tbody>
+            </table>
+        </fieldset>
 
     </div>
 

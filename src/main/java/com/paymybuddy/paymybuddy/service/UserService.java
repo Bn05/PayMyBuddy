@@ -27,6 +27,8 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
+    public Iterable<User> findAllUser(){return userRepository.findAll();}
+
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }

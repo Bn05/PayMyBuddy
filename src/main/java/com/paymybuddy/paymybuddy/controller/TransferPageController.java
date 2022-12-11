@@ -1,20 +1,17 @@
 package com.paymybuddy.paymybuddy.controller;
 
-import com.paymybuddy.paymybuddy.exceptions.SenderWalletToLowException;
+
 import com.paymybuddy.paymybuddy.model.SecurityUser;
 import com.paymybuddy.paymybuddy.model.Transaction;
 import com.paymybuddy.paymybuddy.model.User;
 import com.paymybuddy.paymybuddy.service.TransactionService;
 import com.paymybuddy.paymybuddy.service.UserService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -39,11 +36,15 @@ public class TransferPageController {
                                Model model,
                                @RequestParam("page")
                                Optional<Integer> page,
-                               @RequestParam("size") Optional<Integer> size) {
+                               @RequestParam("size") Optional<Integer> size,
+                               @RequestParam(required = false, value = "walletIsToLow") boolean walletIsToLow
+    ) {
 
         //Security Param ///
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
         User user = securityUser.getUser();
+
+        model.addAttribute("walletIsToLow", walletIsToLow);
 
         // End of Security Param //
 
@@ -81,12 +82,13 @@ public class TransferPageController {
 
     @RequestMapping(value = "/addTransaction")
     public ModelAndView addTransaction(Authentication authentication,
-                                       @RequestParam(value = "contact")int receivingUserId,
-                                       @RequestParam(value = "amount")int amount
-                                      ) {
+                                       @RequestParam(value = "contact") int receivingUserId,
+                                       @RequestParam(value = "amount") int amount
+    ) {
 
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
         User senderUser = securityUser.getUser();
+        ModelAndView modelAndView = new ModelAndView("redirect:/transferPage");
 
         User receivingUser = userService.getUser(receivingUserId);
 
@@ -100,7 +102,7 @@ public class TransferPageController {
         int senderWallet = senderUser.getWallet();
         int amountTransaction = transactionRequest.getAmount();
 
-        if (senderWallet > amountTransaction) {
+        if (senderWallet >= amountTransaction) {
 
             senderUser.setWallet(senderWallet - amountTransaction);
             receivingUser.setWallet(receivingUser.getWallet() + amountTransaction);
@@ -109,9 +111,11 @@ public class TransferPageController {
             userService.updateUser(receivingUser);
 
             transactionService.addTransaction(transactionRequest);
-        } else throw new SenderWalletToLowException("Solde insuffisant");
+        } else {
+            modelAndView.addObject("walletIsToLow", true);
+        }
 
-        return new ModelAndView("redirect:/transferPage");
+        return modelAndView;
 
 
     }

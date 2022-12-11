@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ContactController {
@@ -20,10 +20,21 @@ public class ContactController {
     @Autowired
     public UserService userService;
 
-    private User newContact;
-
     @RequestMapping(value = "/contactPage")
-    public String contactPage() {
+    public String contactPage(Authentication authentication,
+                              @RequestParam(required = false, value = "alwaysYourContact") boolean alwaysYourContact,
+                              @RequestParam(required = false, value = "noCustomer") boolean noCustomer,
+                              Model model
+    ) {
+        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+        User user = securityUser.getUser();
+
+        Iterable<User> userContacts = user.getContacts();
+
+        model.addAttribute("alwaysYourContact", alwaysYourContact);
+        model.addAttribute("noCustomer", noCustomer);
+        model.addAttribute("userContacts", userContacts);
+
         return "contactPage";
     }
 
@@ -32,53 +43,36 @@ public class ContactController {
     public ModelAndView addContact(Authentication authentication, Model model, @RequestParam(value = "email") String email) {
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
         User user = securityUser.getUser();
-
-        newContact = userService.getUserByEmail(email).orElse(null);
-
+        User newContact = userService.getUserByEmail(email).orElse(null);
+        ModelAndView modelAndView = new ModelAndView("redirect:/contactPage");
 
         if (newContact == null) {
-            boolean error = true;
-            String errorNoClient = "La personne à qui appartient cette adresse n'est pas encore inscrit à Pay My Byddy. Invitez le :)";
-            model.addAttribute("errorNoClient", errorNoClient);
-
-            return new ModelAndView("redirect:/contactPage");
-        } else if (user.getContacts().contains(newContact)) {
-
-            String errorAlwaysContact = "Deja votre contact";
-            model.addAttribute("errorAlwaysContact", errorAlwaysContact);
-
+            modelAndView.addObject("noCustomer", true);
+            return modelAndView;
         }
-        return new ModelAndView("redirect:/contactPage/validation");
+
+        boolean alwaysContact = false;
+        for (User contact : user.getContacts()) {
+            if (contact.getUserId() == (newContact.getUserId())) {
+                alwaysContact = true;
+                break;
+            }
+        }
+
+        if (alwaysContact) {
+            model.addAttribute("alwaysYourContact", true);
+            return modelAndView;
+        } else {
+
+            List<User> contacts = user.getContacts();
+            contacts.add(newContact);
+            userService.updateUser(user);
+
+            return modelAndView;
+        }
+
 
     }
 
-    @RequestMapping(value = "/contactPage/validation")
-    public String addContactValidation(Model model) {
-
-        String contactFirstName = newContact.getFirstName();
-        String contactLastName = newContact.getLastName();
-
-        model.addAttribute("contactFirstName", contactFirstName);
-        model.addAttribute("contactLastName", contactLastName);
-
-        return "addValidationContactPage";
-    }
-
-    @RequestMapping(value = "/contactPage/validation/yes")
-    public String addContactValidationYes(Authentication authentication) {
-        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        User user = securityUser.getUser();
-
-        List<User> contacts = user.getContacts();
-        contacts.add(newContact);
-        userService.updateUser(user);
-
-        return "contactPage";
-    }
-
-    @GetMapping(value = "/contactPage/validation/no")
-    public String addContactValidationNo() {
-        return "contactPage";
-    }
 
 }
