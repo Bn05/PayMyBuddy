@@ -11,47 +11,38 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
 @SpringBootApplication
-public class PayMyBuddyApplication implements CommandLineRunner {
+public class PayMyBuddyApplication {
 
-    @Autowired
-    UserService userService;
-    @Autowired
-    SpringSecurityConfig springSecurityConfig;
 
     public static void main(String[] args) {
         SpringApplication.run(PayMyBuddyApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
 
-        // TODO : ajout wallet pmb ? Gestion de la comission
+    // TODO : ajout wallet Pay my Buddy ? Gestion de la comission
 
+    // TODO: erreur si mauvaise information page d'inscription & page modification profil
 
-        // TODO: erreur si mauvaise information page d'inscription & page modification profil
+    // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin
 
+    // TODO: test unitaire
+    // TODO: test d'integration
 
-        // TODO: page home
-        // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin
-
-        // TODO: test unitaire
-        // TODO: test d'integration
-
-        // TODO: javadoc
-        // TODO: readme
-        // TODO: spotbug
-        // TODO: jacoco
-        // TODO: pom.xml
-        //TODO : supprimer AUTORWIRED
-        //TODO : refactoriser code !!
-        //TODO : Actualisation de la base de donnée
+    // TODO: javadoc
+    // TODO: readme
+    // TODO: spotbug
+    // TODO: jacoco
+    // TODO: pom.xml
+    //TODO : supprimer AUTORWIRED
+    //TODO : refactoriser code !!
+    //TODO : Actualisation de la base de donnée
 
 
-        // TODO: gestion de la deconnexion
-        // TODO: test end to end
-        // TODO : affiner VARCHAR
+    // TODO: gestion de la deconnexion
+    // TODO: test end to end
+    // TODO : affiner VARCHAR
 
 
-        // TODO: oath2
-    }
+    // TODO: oath2
+
 }
