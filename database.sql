@@ -24,6 +24,7 @@ CREATE TABLE transaction
     sender_user_id     INTEGER NOT NULL REFERENCES user (user_Id),
     receiving_user_id  INTEGER NOT NULL REFERENCES user (user_Id),
     transaction_date   DATE    NOT NULL,
+    transaction_comment VARCHAR(255) NOT NULL,
     transaction_amount INTEGER NOT NULL
 );
 
@@ -62,10 +63,10 @@ INSERT INTO user (firstName, lastName, birthdate, email, address, wallet, passwo
      '$2y$10$syavJCs0C7s.EVlCnBjWxuRwxBTC4Yj8FFUDnfQekcOoMgvMcdbnS')
 ;
 
-INSERT INTO transaction(sender_user_id, receiving_user_id, transaction_date, transaction_amount)
-    VALUE (1, 2, '2022-01-01', 25),
-    (1, 3, '2022-02-05', 50),
-    (3, 1, '2022-12-04', 75)
+INSERT INTO transaction(sender_user_id, receiving_user_id, transaction_date,transaction_comment, transaction_amount)
+    VALUE (1, 2, '2022-01-01','Ciné', 25),
+    (1, 3, '2022-02-05','Restaurant', 50),
+    (3, 1, '2022-12-04','Covoit', 75)
 ;
 
 INSERT INTO user_user (main_user_id, contact_user_id)

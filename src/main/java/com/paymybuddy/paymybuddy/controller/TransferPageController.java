@@ -34,8 +34,7 @@ public class TransferPageController {
     @RequestMapping(value = "/transferPage")
     public String transferPage(Authentication authentication,
                                Model model,
-                               @RequestParam("page")
-                               Optional<Integer> page,
+                               @RequestParam("page") Optional<Integer> page,
                                @RequestParam("size") Optional<Integer> size,
                                @RequestParam(required = false, value = "walletIsToLow") boolean walletIsToLow
     ) {
@@ -83,7 +82,8 @@ public class TransferPageController {
     @RequestMapping(value = "/addTransaction")
     public ModelAndView addTransaction(Authentication authentication,
                                        @RequestParam(value = "contact") int receivingUserId,
-                                       @RequestParam(value = "amount") int amount
+                                       @RequestParam(value = "amount") int amount,
+                                       @RequestParam(value = "comment") String comment
     ) {
 
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
@@ -97,6 +97,7 @@ public class TransferPageController {
         transactionRequest.setSenderUser(senderUser);
         transactionRequest.setReceivingUser(receivingUser);
         transactionRequest.setTransactionDate(LocalDate.now());
+        transactionRequest.setComment(comment);
         transactionRequest.setAmount(amount);
 
         int senderWallet = senderUser.getWallet();

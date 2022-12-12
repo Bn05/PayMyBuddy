@@ -31,12 +31,11 @@ public class PayMyBuddyApplication implements CommandLineRunner {
         // TODO :  Wallet int -> double ou float
         // TODO : Ajouter commission de 5%
 
-
-        // TODO: page home
         // TODO: erreur si mauvaise information page d'inscription & page modification profil
 
-        // TODO : suppression contact
 
+        // TODO: page home
+        // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin
 
         // TODO: test unitaire
         // TODO: test d'integration
@@ -48,12 +47,13 @@ public class PayMyBuddyApplication implements CommandLineRunner {
         // TODO: pom.xml
         //TODO : supprimer AUTORWIRED
         //TODO : refactoriser code !!
+        //TODO : Actualisation de la base de donnée
 
 
         // TODO: gestion de la deconnexion
         // TODO: test end to end
         // TODO : affiner VARCHAR
-        // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin
+
 
         // TODO: oath2
     }

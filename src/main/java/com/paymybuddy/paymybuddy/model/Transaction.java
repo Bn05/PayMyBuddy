@@ -26,20 +26,15 @@ public class Transaction {
     @Column(name = "transaction_date")
     private LocalDate transactionDate;
 
+    @Column(name = "transaction_comment")
+    private String comment;
+
     @Column(name = "transaction_amount")
     private int amount;
-
-    public Transaction(User senderUser, User receivingUser, LocalDate transactionDate, int amount) {
-        this.senderUser = senderUser;
-        this.receivingUser = receivingUser;
-        this.transactionDate = transactionDate;
-        this.amount = amount;
-    }
 
     public Transaction() {
 
     }
-
 
     public int getTransactionId() {
         return transactionId;
@@ -80,4 +75,13 @@ public class Transaction {
     public void setAmount(int amount) {
         this.amount = amount;
     }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
 }
