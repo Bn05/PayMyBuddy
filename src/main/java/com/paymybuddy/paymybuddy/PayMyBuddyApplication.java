@@ -25,14 +25,10 @@ public class PayMyBuddyApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-
-        // TODO: ajout commentaire transaction
-        // TODO : Transaction IN et OUT
         // TODO :  Wallet int -> double ou float
         // TODO : Ajouter commission de 5%
 
         // TODO: erreur si mauvaise information page d'inscription & page modification profil
-
 
         // TODO: page home
         // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin

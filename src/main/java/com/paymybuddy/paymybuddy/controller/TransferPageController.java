@@ -60,9 +60,9 @@ public class TransferPageController {
 
         // Transaction LIST Start ////
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(1);
+        int pageSize = size.orElse(10);
 
-        Page<Transaction> transactionPage = transactionService.findTransactionPage(PageRequest.of(currentPage - 1, pageSize));
+        Page<Transaction> transactionPage = transactionService.findTransactionPage(user,PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("transactionPage", transactionPage);
 
