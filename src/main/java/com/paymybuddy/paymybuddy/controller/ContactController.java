@@ -7,8 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -70,8 +69,26 @@ public class ContactController {
 
             return modelAndView;
         }
+    }
 
+    @GetMapping(value = "/contactPage/deleteContact")
+    public String deleteContact(Authentication authentication,
+                                @RequestParam(value = "email") String email
+    ) {
+        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+        User user = securityUser.getUser();
+        List<User> contacts = user.getContacts();
 
+        for (User contact : contacts) {
+            if (contact.getEmail().equals(email)) {
+                contacts.remove(contact);
+                break;
+            }
+        }
+
+        user.setContacts(contacts);
+        userService.updateUser(user);
+        return "redirect:/contactPage";
     }
 
 

@@ -35,6 +35,7 @@
         </form>
     </div>
 
+
     <div id="myContact">
         <fieldset>
             <legend> Mes contacts</legend>
@@ -50,7 +51,9 @@
                     <td th:text="${contact.firstName}"/>
                     <td th:text="${contact.lastName}"/>
                     <td th:text="${contact.email}"/>
-
+                    <td>
+                        <a th:href="@{/contactPage/deleteContact?email={id}(id=${contact.email})}"><button class="btn btn-danger">Supprimer</button></a>
+                    </td>
 
                 </tr>
 

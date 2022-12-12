@@ -27,13 +27,15 @@ public class PayMyBuddyApplication implements CommandLineRunner {
 
 
         // TODO: ajout commentaire transaction
-        //TODO : Transaction IN et OUT
-        //TODO :  Wallet int -> double ou float
+        // TODO : Transaction IN et OUT
+        // TODO :  Wallet int -> double ou float
         // TODO : Ajouter commission de 5%
 
 
         // TODO: page home
         // TODO: erreur si mauvaise information page d'inscription & page modification profil
+
+        // TODO : suppression contact
 
 
         // TODO: test unitaire
