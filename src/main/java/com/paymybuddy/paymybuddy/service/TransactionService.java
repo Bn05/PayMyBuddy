@@ -41,8 +41,6 @@ public class TransactionService {
         Iterable<Transaction> transactionIterable = transactionRepository.findTransactionByUser(user.getUserId());
         List<Transaction> transactions = new LinkedList<>();
         for (Transaction transaction : transactionIterable) {
-
-            transaction.setAmount(transaction.getAmount()/100);
             transactions.add(transaction);
         }
 

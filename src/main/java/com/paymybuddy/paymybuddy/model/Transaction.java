@@ -30,7 +30,7 @@ public class Transaction {
     private String comment;
 
     @Column(name = "transaction_amount")
-    private int amount;
+    private float amount;
 
     public Transaction() {
 
@@ -68,11 +68,11 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    public int getAmount() {
+    public float getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(float amount) {
         this.amount = amount;
     }
 

@@ -60,7 +60,7 @@ public class TransferPageController {
 
         // Transaction LIST Start ////
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(10);
+        int pageSize = size.orElse(5);
 
         Page<Transaction> transactionPage = transactionService.findTransactionPage(user,PageRequest.of(currentPage - 1, pageSize));
 
@@ -82,7 +82,7 @@ public class TransferPageController {
     @RequestMapping(value = "/addTransaction")
     public ModelAndView addTransaction(Authentication authentication,
                                        @RequestParam(value = "contact") int receivingUserId,
-                                       @RequestParam(value = "amount") int amount,
+                                       @RequestParam(value = "amount") float amount,
                                        @RequestParam(value = "comment") String comment
     ) {
 
@@ -100,8 +100,8 @@ public class TransferPageController {
         transactionRequest.setComment(comment);
         transactionRequest.setAmount(amount);
 
-        int senderWallet = senderUser.getWallet();
-        int amountTransaction = transactionRequest.getAmount();
+        float senderWallet = senderUser.getWallet();
+        float amountTransaction = transactionRequest.getAmount();
 
         if (senderWallet >= amountTransaction) {
 

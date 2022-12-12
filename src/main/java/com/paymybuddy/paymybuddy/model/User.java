@@ -43,7 +43,7 @@ public class User {
 
     private String address;
 
-    private int wallet;
+    private float wallet;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
@@ -113,11 +113,11 @@ public class User {
         this.address = address;
     }
 
-    public int getWallet() {
+    public float getWallet() {
         return wallet;
     }
 
-    public void setWallet(int wallet) {
+    public void setWallet(float wallet) {
         this.wallet = wallet;
     }
 

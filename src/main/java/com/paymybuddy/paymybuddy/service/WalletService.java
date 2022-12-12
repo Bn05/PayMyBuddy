@@ -11,13 +11,13 @@ public class WalletService {
     @Autowired
     private UserRepository userRepository;
 
-    public int getWallet(int userId) {
+    public float getWallet(int userId) {
         return userRepository.findById(userId).get().getWallet();
     }
 
-    public int addMoneyToWallet(int userId, int amountTransaction) {
+    public float addMoneyToWallet(int userId, int amountTransaction) {
         User user = userRepository.findById(userId).get();
-        int userWallet = getWallet(userId);
+        float userWallet = getWallet(userId);
 
         userWallet = userWallet + amountTransaction;
         user.setWallet(userWallet);
@@ -26,10 +26,10 @@ public class WalletService {
         return userWallet;
     }
 
-    public int transfertMoneyToBank(int userId, int amountTransaction) {
+    public float transfertMoneyToBank(int userId, int amountTransaction) {
         User user = userRepository.findById(userId).get();
-        int userWallet = getWallet(userId);
-        int commission = 1;
+        float userWallet = getWallet(userId);
+        float commission = 1;
 
         userWallet = userWallet - amountTransaction*commission ;
         user.setWallet(userWallet);

@@ -13,7 +13,7 @@ CREATE TABLE user
     birthdate DATE         NOT NULL,
     email     VARCHAR(255) UNIQUE,
     address   VARCHAR(255),
-    wallet    INTEGER,
+    wallet    FLOAT,
     password  VARCHAR(255)
 
 );
@@ -25,7 +25,7 @@ CREATE TABLE transaction
     receiving_user_id  INTEGER NOT NULL REFERENCES user (user_Id),
     transaction_date   DATE    NOT NULL,
     transaction_comment VARCHAR(255) NOT NULL,
-    transaction_amount INTEGER NOT NULL
+    transaction_amount FLOAT NOT NULL
 );
 
 CREATE TABLE user_user

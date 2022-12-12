@@ -22,7 +22,7 @@ public class ProfileController {
     @Autowired
     UserService userService;
 
-    private int amountTest;
+    private float amountTransaction;
 
     @RequestMapping(value = "/profilePage")
     public String profilePage(Authentication authentication,
@@ -37,7 +37,6 @@ public class ProfileController {
     ) {
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
         User user = securityUser.getUser();
-
 
 
         model.addAttribute("user", user);
@@ -91,7 +90,7 @@ public class ProfileController {
                                                   @RequestParam(value = "bankCardId") int bankCardId,
                                                   @RequestParam(value = "bankCardSecurity") int bankCardSecurity,
                                                   @RequestParam(value = "bankCardUserName") String bankCardUserName,
-                                                  @RequestParam(value = "amount") int amount
+                                                  @RequestParam(value = "amount") float amount
 
 
     ) {
@@ -116,7 +115,7 @@ public class ProfileController {
     @PostMapping(value = "/addMoneyToMyBankAccount")
     public ModelAndView addMoneyToMyBankAccount(Authentication authentication,
                                                 @RequestParam(value = "iban") String iban,
-                                                @RequestParam(value = "amount") int amount
+                                                @RequestParam(value = "amount") float amount
     ) {
 
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
@@ -127,7 +126,7 @@ public class ProfileController {
         if (user.getWallet() > amount) {
 
             modelAndView.addObject("validationCommission", true);
-amountTest=amount;
+            amountTransaction = amount;
             modelAndView.addObject("amountToBank", String.valueOf(amount));
             modelAndView.addObject("amountLessCommission", (amount * 0.95));
 
@@ -138,13 +137,13 @@ amountTest=amount;
     }
 
     @GetMapping(value = "/addMoneyToMyBankAccount/validation")
-    public String addMoneyToMyBankAccountValidation( Authentication authentication
+    public String addMoneyToMyBankAccountValidation(Authentication authentication
 
     ) {
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
         User user = securityUser.getUser();
 
-        user.setWallet(user.getWallet() - amountTest);
+        user.setWallet(user.getWallet() - amountTransaction);
         userService.updateUser(user);
 
 
