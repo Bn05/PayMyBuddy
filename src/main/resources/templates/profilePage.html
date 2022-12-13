@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Profile Page</title>
@@ -86,8 +86,9 @@
     <div id="validation Commission" th:if="${validationCommission}"> Vous avez demandé a effectuer un virement de
         <span
                 th:text="${amountToBank}?:'null'"/> <br/>
-        Comme annoncé dans nos conditions générales, nous allons y appliquer une commission de 5%. Vous receverez
-        donc un montant de <span th:text="${amountLessCommission}?:'nulll'"/>€
+        Comme annoncé dans nos conditions générales, nous allons y appliquer une commission de 5%. La commission sera
+        donc de <span th:text="${commissionRound}?:'nulll'"/>€ <br>
+        Et Vous receverez un montant de <span th:text="${amountLessCommission}?:'nulll'"/>€
 
         <div id="choice">
 
@@ -96,7 +97,7 @@
             </form>
 
             <form action="/profilePage" method="get">
-                <input type="submit" value="Annuler" name="amount" >
+                <input type="submit" value="Annuler" name="amount">
             </form>
         </div>
     </div>

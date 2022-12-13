@@ -6,6 +6,7 @@ import com.paymybuddy.paymybuddy.model.Transaction;
 import com.paymybuddy.paymybuddy.model.User;
 import com.paymybuddy.paymybuddy.repository.TransactionRepository;
 import com.paymybuddy.paymybuddy.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -21,6 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @Service
+@Transactional
 public class TransactionService {
 
     @Autowired
@@ -33,8 +35,6 @@ public class TransactionService {
     public Transaction addTransaction(Transaction transaction) {
         return transactionRepository.save(transaction);
     }
-
-
 
     public Page<Transaction> findTransactionPage(User user, Pageable pageable) {
 

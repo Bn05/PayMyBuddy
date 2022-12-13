@@ -18,10 +18,8 @@ public class PayMyBuddyApplication {
         SpringApplication.run(PayMyBuddyApplication.class, args);
     }
 
-
-    // TODO : ajout wallet Pay my Buddy ? Gestion de la comission
-
     // TODO: erreur si mauvaise information page d'inscription & page modification profil
+    // TODO : erreur info cb et iban
 
     // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin
 

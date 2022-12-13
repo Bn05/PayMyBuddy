@@ -36,6 +36,14 @@ public class Transaction {
 
     }
 
+    public Transaction(User senderUser, User receivingUser, LocalDate transactionDate, String comment, float amount) {
+        this.senderUser = senderUser;
+        this.receivingUser = receivingUser;
+        this.transactionDate = transactionDate;
+        this.comment = comment;
+        this.amount = amount;
+    }
+
     public int getTransactionId() {
         return transactionId;
     }

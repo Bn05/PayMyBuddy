@@ -50,25 +50,19 @@ public class ContactController {
             return modelAndView;
         }
 
-        boolean alwaysContact = false;
         for (User contact : user.getContacts()) {
             if (contact.getUserId() == (newContact.getUserId())) {
-                alwaysContact = true;
-                break;
+                modelAndView.addObject("alwaysYourContact", true);
+                return modelAndView;
             }
         }
 
-        if (alwaysContact) {
-            model.addAttribute("alwaysYourContact", true);
-            return modelAndView;
-        } else {
+        List<User> contacts = user.getContacts();
+        contacts.add(newContact);
+        userService.updateUser(user);
 
-            List<User> contacts = user.getContacts();
-            contacts.add(newContact);
-            userService.updateUser(user);
+        return modelAndView;
 
-            return modelAndView;
-        }
     }
 
     @GetMapping(value = "/contactPage/deleteContact")

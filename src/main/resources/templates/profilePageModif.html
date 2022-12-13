@@ -23,7 +23,7 @@
     <form method="post" th:action="@{/updateAccount}" th:object="${user}">
         <ul>
             <li>
-                <label for="firstName">FirstName : </label><input type="text" placeholder="Bertand"
+                <label for="firstName">FirstName : </label><input type="text" th:placeholder="${user.firstName}"
                                                                   th:field="*{firstName}"
             >
             </li>
