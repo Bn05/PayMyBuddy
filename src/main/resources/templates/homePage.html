@@ -23,17 +23,18 @@
         </div>
     </div>
     <div id="path">
-        <h3>Home</h3>
+        <div id="path_path">Home</div>
     </div>
 </header>
 <section>
+    <div id=welcom>
 
-    <h1>Bonjour <span th:text="${user.firstName}"/></h1>
+        <h1>Bonjour <span th:text="${user.firstName}"/></h1>
 
-    <h2> Votre Wallet est à <span th:text="${user.wallet}"/></h2>
+        <h2> Votre Wallet est à <span th:text="${user.wallet}"/></h2>
 
-    <a href="transferPage"> Effectuer une transaction</a>
-
+        <a href="transferPage"> Effectuer une transaction</a>
+    </div>
 
 </section>
 
