@@ -35,11 +35,12 @@ public class SecurityController {
 
         model.addAttribute("user", user);
 
-        return "creationAccount";
+        return "/creationAccount";
     }
 
     @PostMapping(value = "/creationAccount")
-    public String saveUser(@Valid @ModelAttribute User user, BindingResult bindingResult) {
+    public String saveUser(@Valid @ModelAttribute User user,
+                           BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
             return "/creationAccount";
@@ -52,12 +53,5 @@ public class SecurityController {
     public String validateCreationAccount(Model model) {
         return "validateCreationAccount";
     }
-
-    @GetMapping(value = "/logoutfrfrf")
-    public String logout() {
-        return "/logout";
-        // TODO : A VALIDER
-    }
-
 
 }

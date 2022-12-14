@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 
 import java.time.LocalDate;
@@ -24,26 +25,33 @@ public class User {
     private int userId;
 
 
-    @NotBlank(message = "donne ton nom connard")
-    @Size(min = 2, max = 100)
+    @NotBlank(message = "Merci d'indiquer votre prénom")
+    @Size(min = 3, max = 20)
     @Column(name = "firstname")
     private String firstName;
 
-    @NotBlank(message = "ouf guedin")
-    @Size(min = 2, max = 10, message = "")
+    @NotBlank(message = "Merci d'indiquer votre nom")
+    @Size(min = 3, max = 20)
     @Column(name = "lastname")
     private String lastName;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Merci d'indiquer votre date de naissance")
     private LocalDate birthdate;
 
+    @NotBlank(message = "Merci d'indiquer votre email")
+    @Size(min = 5, max = 30)
     @Column(unique = true)
     private String email;
 
-
+    @NotBlank(message = "Merci d'indiquer votre adresse postale")
+    @Size(min = 5, max = 30)
     private String address;
 
     private float wallet;
 
+    @NotBlank(message = "Merci de créer un mot de passe")
+    @Size(min = 5)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 

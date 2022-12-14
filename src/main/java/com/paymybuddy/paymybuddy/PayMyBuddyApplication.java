@@ -18,8 +18,9 @@ public class PayMyBuddyApplication {
         SpringApplication.run(PayMyBuddyApplication.class, args);
     }
 
-    // TODO: erreur si mauvaise information page d'inscription & page modification profil
+    // TODO : Gerer la modification de mot de passe
     // TODO : erreur info cb et iban
+    // TODO : Gestion des erreurs
 
     // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin
 

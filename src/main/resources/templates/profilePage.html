@@ -46,11 +46,11 @@
                     <ol>
                         <li>
                             <label for=numero_de_carte>N° de carte</label>
-                            <input id=numero_de_carte name=bankCardId type=number required>
+                            <input id=numero_de_carte name=bankCardId type=number placeholder="numero de carte" min="1" step="1" minlength="3" maxlength="16" required >
                         </li>
                         <li>
                             <label for=securite>Code sécurité</label>
-                            <input id=securite name=bankCardSecurity type=number required>
+                            <input id=securite name=bankCardSecurity type=number placeholder="code de sécurité" min="1"  step="1" minlength="3" maxlength="3" required>
                         </li>
                         <li>
                             <label for=nom_porteur>Nom du porteur</label>

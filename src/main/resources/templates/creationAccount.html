@@ -15,13 +15,16 @@
   <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"></p>
   <label > lastName </label>
   <input type="text" th:field="*{lastName}"><br>
+  <p th:if="${#fields.hasErrors('birthdate')}" th:errorclass="error" th:errors="*{birthdate}"></p>
   <label > birthdate </label>
   <input type="date" th:field="*{birthdate}"><br>
+  <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>
   <label > email </label>
   <input type="email" th:field="*{email}"><br>
+  <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}"></p>
   <label > address </label>
   <input type="text" th:field="*{address}"><br>
-  <p th:if="${#fields.hasErrors('test')}" th:errorclass="error" th:errors="*{test}"></p>
+  <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
   <label > password </label>
   <input type="password" th:field="*{password}"><br>
   <button type="submit">Créer</button>

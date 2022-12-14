@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TransactionRepository extends CrudRepository<Transaction,Integer> {
 
-    @Query(value = "SELECT * FROM transaction WHERE sender_user_id = :user or  receiving_user_id = :user ORDER BY transaction_date DESC" , nativeQuery = true)
+    @Query(value = "SELECT * FROM transaction WHERE sender_user_id = :user or  receiving_user_id = :user ORDER BY transaction_date DESC, transaction_id DESC" , nativeQuery = true)
     public Iterable<Transaction> findTransactionByUser(
             @Param("user")int user
     );

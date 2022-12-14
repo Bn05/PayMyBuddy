@@ -6,10 +6,12 @@ import com.paymybuddy.paymybuddy.model.User;
 import com.paymybuddy.paymybuddy.service.BankServive;
 import com.paymybuddy.paymybuddy.service.TransactionService;
 import com.paymybuddy.paymybuddy.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -82,8 +84,12 @@ public class ProfileController {
 
 
     @PostMapping(value = "/updateAccount")
-    public String updateAccount(@ModelAttribute User updateUser) {
+    public String updateAccount(@Valid @ModelAttribute User updateUser,
+                                BindingResult bindingResult) {
 
+        if (bindingResult.hasErrors()) {
+            return "/profilePageModif";
+        }
         user.setFirstName(updateUser.getFirstName());
         user.setLastName(updateUser.getLastName());
         user.setBirthdate(updateUser.getBirthdate());

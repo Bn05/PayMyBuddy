@@ -3,28 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
+    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
+
 </head>
 <body>
 <header>
-    <div id="logo"> Pay My Buddy</div>
-    <div id="menu">
-        <ul>
-            <li><a href="/homePage">Home</a></li>
-            <li><a href="/transferPage"> Transfer</a></li>
-            <li><a href="/profilePage"> Profile </a></li>
-            <li><a href="/contactPage">Contact </a></li>
-            <li><a href="/logout">Log off </a></li>
+    <div id="top">
+        <div id="logo"> Pay My Buddy</div>
+        <div id="menu">
+            <ul>
+                <li><a href="/homePage">Home</a></li>
+                <li><a href="/transferPage"> Transfer</a></li>
+                <li><a href="/profilePage"> Profile </a></li>
+                <li><a href="/contactPage">Contact </a></li>
+                <li><a href="/logout">Log off </a></li>
 
 
-        </ul>
+            </ul>
+        </div>
     </div>
-    <div id="path">Home</div>
+    <div id="path">
+        <h3>Home</h3>
+    </div>
 </header>
 <section>
 
-    <h1>Bonjour   <span th:text="${user.firstName}"/> </h1>
+    <h1>Bonjour <span th:text="${user.firstName}"/></h1>
 
-    <h2> Votre Wallet est à  <span th:text="${user.wallet}"/></h2>
+    <h2> Votre Wallet est à <span th:text="${user.wallet}"/></h2>
 
     <a href="transferPage"> Effectuer une transaction</a>
 
