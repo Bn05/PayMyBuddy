@@ -1,0 +1,155 @@
+body {
+    margin: 0;
+}
+
+header {
+    min-height: 15vh;
+}
+
+#top {
+    min-height: 10vh;
+    font-size: 200%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#logo {
+    background: linear-gradient(to right, #60b859, #8ac149);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+
+header ul {
+    display: flex;
+    list-style: none;
+}
+
+header li {
+    margin-left: 30px;
+}
+
+header ul a {
+    text-decoration: none;
+    color: black;
+}
+
+header ul a:hover {
+    color: #0274d6;
+}
+
+
+#path {
+    min-height: 10vh;
+    font-size: 200%;
+    display: flex;
+    margin-top: 00px;
+    background-color: #f3f3f3;
+    height: 50px;
+    align-items: center;
+}
+
+#path_path {
+    margin-left: 30px;
+    color: #4182bb;
+}
+
+#path_now {
+    color: #9e9e9e;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh;
+    min-width: 75vh;
+}
+
+#myInfo {
+    border-radius: 1%;
+    margin-top: 15px;
+    min-height: 20vh;
+    width: 75vh;
+    background-color: #f3f3f3;
+}
+
+#myInfo p {
+    margin-left: 35px;
+    margin-right: 35px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#modificationMyInfo {
+    min-width: 75vh;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#modificationMyInfo input {
+    font-size: 1.0em;
+    background-color: #0274d6;
+    padding: 10px 30px 10px 30px;
+    margin-right: 0;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+#modificationMyInfo input:hover {
+    padding: 12px 32px 12px 32px;
+}
+
+
+#addMoney {
+    border-radius: 1%;
+    margin-top: 15px;
+    min-height: 20vh;
+    width: 75vh;
+    background-color: #f3f3f3;
+}
+
+#addMoney form{
+
+}
+
+#addMoney ol {
+    list-style: none;
+}
+
+#addMoney li {
+    display: flex;
+    justify-content: space-between;
+    width: 35vh;
+}
+
+#buttonSend{
+    width: 75vh;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#addMoney button {
+    font-size: 1.0em;
+    background-color: #0274d6;
+    padding: 10px 30px 10px 30px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+
+
+
+

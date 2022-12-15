@@ -1,0 +1,227 @@
+body {
+    margin: 0;
+}
+
+header {
+    min-height: 15vh;
+}
+
+#top {
+    min-height: 10vh;
+    font-size: 200%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#logo {
+    background: linear-gradient(to right, #60b859, #8ac149);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+}
+
+li {
+    margin-left: 30px;
+}
+
+ul a {
+    text-decoration: none;
+    color: black;
+}
+
+ul a:hover {
+    color: #0274d6;
+}
+
+
+#path {
+    min-height: 10vh;
+    font-size: 200%;
+    display: flex;
+    margin-top: 00px;
+    background-color: #f3f3f3;
+    height: 50px;
+    align-items: center;
+}
+
+#path_path {
+    margin-left: 30px;
+    color: #4182bb;
+}
+
+#path_now {
+    color: #9e9e9e;
+}
+
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 80vh;
+    min-width: 100vh;
+}
+
+#SendMoneyAddConnection {
+    display: flex;
+    min-width: 75vh;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2em;
+    margin-top: 30px;
+    padding: 0;
+}
+
+#SendMoneyAddConnection h3 {
+    margin: 0;
+}
+
+#SendMoneyAddConnection button {
+    font-size: 1.2em;
+    background-color: #0274d6;
+    padding: 10px 30px 10px 30px;
+    margin-left: 0;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor:pointer;
+}
+
+#sendMoney {
+    min-width: 75vh;
+    background-color: #f3f3f3;
+    padding: 30px 0px 30px 0px;
+}
+
+form {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 15px 0 15px;
+
+
+}
+
+form button {
+    font-size: 1.0em;
+    background-color: #5bb75b;
+    padding: 10px 50px 10px 50px;
+    margin-left: 0;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor:pointer;
+}
+
+form select {
+    font-size: 1.0em;
+    background-color: white;
+    color: black;
+    padding: 10px 10px 10px 10px;
+}
+
+form input {
+    font-size: 1.0em;
+}
+
+
+#myTransactions {
+    min-width: 75vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 1.2em;
+    margin-top: 30px;
+    padding: 0;
+}
+
+#TransactionTable {
+    width: 75vh;
+    border: solid black;
+}
+
+#myTransactions h3 {
+    padding: 0;
+    margin: 0;
+}
+
+#myTransactions table {
+    border-collapse: collapse;
+    display: table;
+    width: 75vh;
+
+}
+
+#myTransactions thead {
+    display: table-row-group;
+    height: 10vh;
+    text-align: center;
+}
+
+#myTransactions th {
+
+    background-color: #5bb75b;
+    border: solid #5bb75b;
+    color: white;
+    padding: 20px 0 20px 0;
+}
+
+#myTransactions tbody {
+    display: table-row-group;
+    height: 30vh;
+    text-align: center;
+
+
+}
+
+#myTransactions tr:nth-child(1) {
+    background-color: #f3f3f3;
+    padding: 20px 0 20px 0;
+
+
+}
+
+#myTransactions tr:nth-child(2) {
+    background-color: white;
+    padding: 20px 0 20px 0;
+}
+
+#myTransactions tr:nth-child(3) {
+    background-color: #f3f3f3;
+    padding: 20px 0 20px 0;
+}
+
+#PageNumber {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width: 75vh;
+}
+
+#PageNumber a {
+    text-decoration: none;
+    color: #107bd8;
+    font-size: 1.2em;
+    border: solid #d0d0d0;
+    margin: 0;
+    padding: 15px;
+}
+
+
+#PageNumber a:hover {
+    padding: 18px;
+}
+
+
+
+
+
+
+

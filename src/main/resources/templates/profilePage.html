@@ -3,107 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile Page</title>
+    <link href="../static/css/profilePage.css" th:href="@{/css/profilePage.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div id="logo"> Pay My Buddy</div>
-    <div id="menu">
-        <ul>
-            <li><a href="/homePage">Home</a></li>
-            <li><a href="/transferPage"> Transfer</a></li>
-            <li><a href="/profilePage"> Profile </a></li>
-            <li><a href="/contactPage">Contact </a></li>
-            <li><a href="/logout">Log off </a></li>
+    <div id="top">
+        <div id="logo"> Pay My Buddy</div>
+        <div id="menu">
+            <ul>
+                <li><a href="/homePage">Home</a></li>
+                <li><a href="/transferPage"> Transfer</a></li>
+                <li><a href="/profilePage"> Profile </a></li>
+                <li><a href="/contactPage">Contact </a></li>
+                <li><a href="/logout">Log off </a></li>
 
-        </ul>
+
+            </ul>
+        </div>
     </div>
-    <div id="path">Home / Profile</div>
+
+    <div id="path">
+        <div id="path_path">Profile / <span id="path_now">Transfer</span></div>
+    </div>
 </header>
-<div id="myInfo">
-    <ul>
-        <li th:text="${user.firstName}"></li>
-        <li th:text="${user.lastName}"></li>
-        <li th:text="${user.birthdate}"></li>
-        <li th:text="${user.email}"></li>
-        <li th:text="${user.address}"></li>
-    </ul>
-</div>
 
-<div id="modificationMyInfo">
-    <form action="/profilePage/modif" method="get">
-        <input type="submit" value="Modifier">
-    </form>
-</div>
 
-<div id="addMoney">
-    <form th:action="@{/addMoneyFromMyBankAccount}" method="post">
+<section>
 
-        <fieldset>
-            <legend>Transférer de l'argent sur mon compte MyPayBuddy</legend>
+    <div id="myInfo">
+        <p> Prénom : <span th:text="${user.firstName}"/></p>
+        <p> Nom : <span th:text="${user.lastName}"/></p>
+        <p> Date de naissance : <span th:text="${user.birthdate}"/></p>
+        <p> Email : <span th:text="${user.email}"/></p>
+        <p> Adresse : <span th:text="${user.address}"/></p>
+    </div>
+
+
+    <div id="modificationMyInfo">
+        <form action="/profilePage/modif" method="get">
+            <input type="submit" value="Modifier">
+        </form>
+    </div>
+
+    <div id="addMoney">
+        <form th:action="@{/addMoneyFromMyBankAccount}" method="post">
             <div id="cbInformation">
-                <fieldset>
-                    <legend>Informations CB</legend>
-                    <ol>
-                        <li>
-                            <label for=numero_de_carte>N° de carte</label>
-                            <input id=numero_de_carte name=bankCardId type=number placeholder="numero de carte" min="1" step="1" minlength="3" maxlength="16" required >
-                        </li>
-                        <li>
-                            <label for=securite>Code sécurité</label>
-                            <input id=securite name=bankCardSecurity type=number placeholder="code de sécurité" min="1"  step="1" minlength="3" maxlength="3" required>
-                        </li>
-                        <li>
-                            <label for=nom_porteur>Nom du porteur</label>
-                            <input id=nom_porteur name=bankCardUserName type=text
-                                   placeholder="Même nom que sur la carte"
-                                   required>
-                        </li>
-                    </ol>
-                </fieldset>
+
+                <ol>
+                    <li>
+                        <label for=numero_de_carte>N° de carte : </label>
+                        <input id=numero_de_carte name=bankCardId type=number placeholder="numero de carte"
+                               min="1"
+                               step="1" minlength="3" maxlength="16" required>
+                    </li>
+                    <li>
+                        <label for=securite>Code sécurité : </label>
+                        <input id=securite name=bankCardSecurity type=number placeholder="code de sécurité"
+                               min="1"
+                               step="1" minlength="3" maxlength="3" required>
+                    </li>
+                    <li>
+                        <label for=nom_porteur>Nom du porteur : </label>
+                        <input id=nom_porteur name=bankCardUserName type=text
+                               placeholder="Même nom que sur la carte"
+                               required>
+                    </li>
+                </ol>
             </div>
+
             <label for="amount">Quel montant souhaitez vous transférer sur votre compte MyPuyBuddy ?</label>
-            <input type="number" id="amount" name="amount" min="0" step="0.01" required/><br/>
-            <button type="submit">Transférer sur mon compte My Pay Buddy</button>
-            <p th:if="${validationFromBank}"> la bank a valider votre virement, le montant est maintenant sur votre
+            <input type="number" id="amount" name="amount" min="0" step="0.01" required/>
+
+            <p th:if="${validationFromBank}"> la banque a validé votre virement, le montant est maintenant sur votre
                 compte</p>
             <p th:if="${rejectFromBank}"> Malheureusement votre banque n'a pas validé le montant. Merci de vous
                 rapprocher de cette dernière</p>
-        </fieldset>
-    </form>
-</div>
 
-<div id="trasnfereToMyBankAccount">
-    <form th:action="@{/addMoneyToMyBankAccount}" method="post">
-        <fieldset>
-            <legend>Transférer sur mon compte en Banque</legend>
-            <label for="iban"></label>
-            <input type="TEXT" id="iban" name="iban" required/>
-            <label for="amountToBank"></label>
-            <input type="number" id="amountToBank" name="amount" min="1" step="0.01" required/>
-            <button type="submit">Valider</button>
-        </fieldset>
-    </form>
-    <div id="validation Commission" th:if="${validationCommission}"> Vous avez demandé a effectuer un virement de
-        <span
-                th:text="${amountToBank}?:'null'"/> <br/>
-        Comme annoncé dans nos conditions générales, nous allons y appliquer une commission de 5%. La commission sera
-        donc de <span th:text="${commissionRound}?:'nulll'"/>€ <br>
-        Et Vous receverez un montant de <span th:text="${amountLessCommission}?:'nulll'"/>€
+            <div id="buttonSend">
+                <button type="submit">Transférer sur mon compte My Pay Buddy</button>
+            </div>
 
-        <div id="choice">
-
-            <form action="/addMoneyToMyBankAccount/validation" method="get">
-                <input type="submit" value="Valider">
-            </form>
-
-            <form action="/profilePage" method="get">
-                <input type="submit" value="Annuler" name="amount">
-            </form>
-        </div>
+        </form>
     </div>
-    <p th:if="${walletToLow}"> Désolé, mais vous ne pouvez effectuer ce virement. Le solde de votre Wallet est
-        inférieur à ce montant</p>
-</div>
+
+    <div id="trasnfereToMyBankAccount">
+        <form th:action="@{/addMoneyToMyBankAccount}" method="post">
+            <fieldset>
+                <legend>Transférer sur mon compte en Banque</legend>
+                <label for="iban"></label>
+                <input type="TEXT" id="iban" name="iban" required/>
+                <label for="amountToBank"></label>
+                <input type="number" id="amountToBank" name="amount" min="1" step="0.01" required/>
+                <button type="submit">Valider</button>
+            </fieldset>
+        </form>
+        <div id="validation Commission" th:if="${validationCommission}"> Vous avez demandé a effectuer un virement de
+            <span
+                    th:text="${amountToBank}?:'null'"/> <br/>
+            Comme annoncé dans nos conditions générales, nous allons y appliquer une commission de 5%. La commission
+            sera
+            donc de <span th:text="${commissionRound}?:'nulll'"/>€ <br>
+            Et Vous receverez un montant de <span th:text="${amountLessCommission}?:'nulll'"/>€
+
+            <div id="choice">
+
+                <form action="/addMoneyToMyBankAccount/validation" method="get">
+                    <input type="submit" value="Valider">
+                </form>
+
+                <form action="/profilePage" method="get">
+                    <input type="submit" value="Annuler" name="amount">
+                </form>
+            </div>
+        </div>
+        <p th:if="${walletToLow}"> Désolé, mais vous ne pouvez effectuer ce virement. Le solde de votre Wallet est
+            inférieur à ce montant</p>
+    </div>
+</section>
 
 
 </body>

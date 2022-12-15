@@ -3,25 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Transfer Page</title>
+    <link href="../static/css/transferPage.css" th:href="@{/css/transferPage.css}" rel="stylesheet"/>
 </head>
+
 <body>
 <header>
-    <div id="logo"> Pay My Buddy</div>
-    <div id="menu">
-        <ul>
-            <li><a href="/homePage">Home</a></li>
-            <li><a href="/transferPage"> Transfer</a></li>
-            <li><a href="/profilePage"> Profile </a></li>
-            <li><a href="/contactPage">Contact </a></li>
-            <li><a href="/logout">Log off </a></li>
+    <div id="top">
+        <div id="logo"> Pay My Buddy</div>
+        <div id="menu">
+            <ul>
+                <li><a href="/homePage">Home</a></li>
+                <li><a href="/transferPage"> Transfer</a></li>
+                <li><a href="/profilePage"> Profile </a></li>
+                <li><a href="/contactPage">Contact </a></li>
+                <li><a href="/logout">Log off </a></li>
 
-        </ul>
+
+            </ul>
+        </div>
     </div>
-    <div id="path">Home / Transfer</div>
+
+    <div id="path">
+        <div id="path_path">Home / <span id="path_now">Transfer</span></div>
+    </div>
 </header>
 
 <section>
-    <div>
+    <div id="SendMoneyAddConnection">
         <h3>Send Money</h3>
         <a href="/contactPage">
             <button>Add Connection</button>
@@ -29,8 +37,6 @@
     </div>
     <div id="sendMoney">
         <form th:action="@{/addTransaction}">
-
-
             <label>
                 <select name="contact" id="contact-select" required>
                     <option value="" th:disabled="disabled" selected>Select a Connection</option>
@@ -40,18 +46,20 @@
             </label>
             <label for="amount"></label>
             <input type="number" id="amount" name="amount" placeholder="0€" min="1" max="10000" step="1" required/>
+
             <label for="comment"></label>
             <input type="text" id="comment" name="comment" placeholder="Commentaire" maxlength="20" required/>
             <button type="submit">Pay</button>
         </form>
+
         <div th:if="${walletIsToLow}"> Vous n'avez pas assez d'argent dans votre Wallet pour effectuer ce virement</div>
     </div>
 
 
     <div id="myTransactions">
-        <fieldset>
-            <legend> Mes transactions</legend>
-            <table border="1">
+        <h3>My Transactions</h3>
+        <div id="TransactionTable">
+            <table>
                 <thead>
                 <tr>
                     <th>Expediteur</th>
@@ -72,13 +80,16 @@
                 </tr>
                 </tbody>
             </table>
+        </div>
+        <div id="PageNumber">
             <div th:if="${transactionPage.totalPages > 0}" class="pagination"
                  th:each="pageNumber : ${pageNumbers}">
                 <a th:href="@{/transferPage(size=${transactionPage.size}, page=${pageNumber})}"
                    th:text=${pageNumber}
                    th:class="${pageNumber==transactionPage.number + 1} ? active"></a>
             </div>
-        </fieldset>
+        </div>
+
     </div>
 </section>
 </body>

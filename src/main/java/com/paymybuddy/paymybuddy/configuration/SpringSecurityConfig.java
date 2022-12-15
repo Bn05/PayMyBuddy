@@ -35,7 +35,7 @@ public class SpringSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests()
-                .requestMatchers("/creationAccount", "/saveUser","/validateCreationAccount", "/TESTcontactPAGE").permitAll()
+                .requestMatchers("/css/**","/creationAccount", "/saveUser","/validateCreationAccount", "/TESTcontactPAGE").permitAll()
                 .requestMatchers("/adminPage").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()

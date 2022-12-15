@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Home Page</title>
-    <link href="../static/css/style.css" th:href="@{/css/style.css}" rel="stylesheet"/>
-
+    <link href="../static/css/homePage.css" th:href="@{/css/homePage.css}" rel="stylesheet"/>
 </head>
+
 <body>
 <header>
     <div id="top">
@@ -22,16 +22,18 @@
             </ul>
         </div>
     </div>
+
     <div id="path">
-        <div id="path_path">Home</div>
+        <div id="path_path">Home / <span id="path_now">Home</span></div>
     </div>
 </header>
+
 <section>
     <div id=welcom>
 
         <h1>Bonjour <span th:text="${user.firstName}"/></h1>
 
-        <h2> Votre Wallet est à <span th:text="${user.wallet}"/></h2>
+        <h2> Votre Wallet est à <span th:text="${user.wallet}"/>€</h2>
 
         <a href="transferPage"> Effectuer une transaction</a>
     </div>

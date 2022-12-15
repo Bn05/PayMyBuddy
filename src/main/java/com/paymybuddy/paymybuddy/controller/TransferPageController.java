@@ -60,7 +60,7 @@ public class TransferPageController {
 
         // Transaction LIST Start ////
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
+        int pageSize = size.orElse(3);
 
         Page<Transaction> transactionPage = transactionService.findTransactionPage(user,PageRequest.of(currentPage - 1, pageSize));
 
