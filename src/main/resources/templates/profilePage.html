@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Profile Page</title>
@@ -36,14 +38,16 @@
         <p> Date de naissance : <span th:text="${user.birthdate}"/></p>
         <p> Email : <span th:text="${user.email}"/></p>
         <p> Adresse : <span th:text="${user.address}"/></p>
+
+        <div id="modificationMyInfo">
+            <form action="/profilePage/modif" method="get">
+                <input type="submit" value="Modifier">
+            </form>
+        </div>
     </div>
 
 
-    <div id="modificationMyInfo">
-        <form action="/profilePage/modif" method="get">
-            <input type="submit" value="Modifier">
-        </form>
-    </div>
+
 
     <div id="addMoney">
         <form th:action="@{/addMoneyFromMyBankAccount}" method="post">
@@ -53,13 +57,13 @@
                     <li>
                         <label for=numero_de_carte>N° de carte : </label>
                         <input id=numero_de_carte name=bankCardId type=number placeholder="numero de carte"
-                               min="1"
+                               min="1" max="10000"
                                step="1" minlength="3" maxlength="16" required>
                     </li>
                     <li>
                         <label for=securite>Code sécurité : </label>
                         <input id=securite name=bankCardSecurity type=number placeholder="code de sécurité"
-                               min="1"
+                               min="1" max="10000"
                                step="1" minlength="3" maxlength="3" required>
                     </li>
                     <li>
@@ -72,7 +76,7 @@
             </div>
 
             <label for="amount">Quel montant souhaitez vous transférer sur votre compte MyPuyBuddy ?</label>
-            <input type="number" id="amount" name="amount" min="0" step="0.01" required/>
+            <input type="number" id="amount" name="amount" min="0" max="10000" step="0.01" required/>
 
             <p th:if="${validationFromBank}"> la banque a validé votre virement, le montant est maintenant sur votre
                 compte</p>

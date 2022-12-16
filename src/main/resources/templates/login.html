@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
@@ -11,26 +13,26 @@
 <section>
 
     <div id="login">
-    <h1 id="bigLogo">Pay My Buddy</h1>
+        <h1 id="bigLogo">Pay My Buddy</h1>
 
 
-    <form th:action="@{/login}" method="post">
+        <form th:action="@{/login}" method="post">
 
             <div th:if="${param.error}" class="alert alert-error">
                 Mauvais identifiants
             </div>
 
             <label for="username"> </label><br>
-            <input  type="text" id="username" name="username" class="fontAwesome" placeholder="&#xf0e0; Email"  />
+            <input type="text" id="username" name="username" class="fontAwesome" placeholder="&#xf0e0; Email"/>
             <label for="password"> </label><br>
             <input type="password" id="password" name="password" class="fontAwesome" placeholder="&#xf023; Password"/>
             <div class="form-action">
                 <button type="submit" class="btn"> Login</button>
             </div>
 
-    </form>
+        </form>
 
-    <a href="/creationAccount">Créer un nouveau Compte</a>
+        <a href="/creationAccount">Créer un nouveau Compte</a>
     </div>
 </section>
 

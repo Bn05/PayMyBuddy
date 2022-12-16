@@ -1,38 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhml"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Contact Page</title>
+    <link href="../static/css/contactPage.css" th:href="@{/css/contactPage.css}" rel="stylesheet"/>
 </head>
 <body>
 <header>
-    <div id="logo"> Pay My Buddy</div>
-    <div id="menu">
-        <ul>
-            <li><a href="/homePage">Home</a></li>
-            <li><a href="/transferPage"> Transfer</a></li>
-            <li><a href="/profilePage"> Profile </a></li>
-            <li><a href="/contactPage">Contact </a></li>
-            <li><a href="/logout">Log off </a></li>
+    <div id="top">
+        <div id="logo"> Pay My Buddy</div>
+        <div id="menu">
+            <ul>
+                <li><a href="/homePage">Home</a></li>
+                <li><a href="/transferPage"> Transfer</a></li>
+                <li><a href="/profilePage"> Profile </a></li>
+                <li><a href="/contactPage">Contact </a></li>
+                <li><a href="/logout">Log off </a></li>
 
-        </ul>
-        <div id="path">Home / Contact</div>
+
+            </ul>
+        </div>
+    </div>
+
+    <div id="path">
+        <div id="path_path">Home / <span id="path_now">Contact</span></div>
     </div>
 </header>
 <section>
-    <h2>Add Connection</h2>
-    <div id="addConnection">
+
+    <div id="gestionContact">
+
+        <h2>Add Connection</h2>
+        <div id="addConnection">
 
 
-        <form th:action="@{/addContact(email='email1')}">
-            <div th:if="${alwaysYourContact}"> Cette personne est déjà dans vos contacts</div>
-            <div th:if="${noCustomer}"> Cette personne n'est pas encore inscrite à notre service. N'hésitez pas à
-                l'inviter :)
-            </div>
-            <input type="email" id="email" name="email" required/>
-            <button type="submit">Add Contact</button>
+            <form th:action="@{/addContact(email='email1')}">
+                <div th:if="${alwaysYourContact}"> Cette personne est déjà dans vos contacts</div>
+                <div th:if="${noCustomer}"> Cette personne n'est pas encore inscrite à notre service. N'hésitez pas à
+                    l'inviter :)
+                </div>
+                <label id="email">Merci d'indiquer l'adresse email : </label>
+                <input type="email" id="email" name="email" required/>
+                <button type="submit">Add Contact</button>
 
-        </form>
+            </form>
+        </div>
     </div>
 
 
@@ -52,7 +66,9 @@
                     <td th:text="${contact.lastName}"/>
                     <td th:text="${contact.email}"/>
                     <td>
-                        <a th:href="@{/contactPage/deleteContact?email={id}(id=${contact.email})}"><button class="btn btn-danger">Supprimer</button></a>
+                        <a th:href="@{/contactPage/deleteContact?email={id}(id=${contact.email})}">
+                            <button class="btn btn-danger">Supprimer</button>
+                        </a>
                     </td>
 
                 </tr>

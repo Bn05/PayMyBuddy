@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+}
+
+header {
+    min-height: 15vh;
+}
+
+#top {
+    min-height: 10vh;
+    font-size: 200%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+#logo {
+    background: linear-gradient(to right, #60b859, #8ac149);
+    padding: 10px;
+    border-radius: 10px;
+    color: white;
+}
+
+ul {
+    display: flex;
+    list-style: none;
+}
+
+li {
+    margin-left: 30px;
+}
+
+ul a {
+    text-decoration: none;
+    color: black;
+}
+
+ul a:hover {
+    color: #0274d6;
+}
+
+
+#path {
+    min-height: 10vh;
+    font-size: 200%;
+    display: flex;
+    margin-top: 00px;
+    background-color: #f3f3f3;
+    height: 50px;
+    align-items: center;
+}
+
+#path_path {
+    margin-left: 30px;
+    color: #4182bb;
+}
+
+#path_now {
+    color: #9e9e9e;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80vh;
+}
+
+#gestionContact {
+    width: 75vh;
+    margin-bottom: 50px;
+    margin-top: 50px;
+    font-size: 1.0em;
+}
+
+#gestionContact h2 {
+    margin-bottom: 0;
+}
+
+#addConnection {
+    background-color: #f3f3f3;
+    padding: 30px 30px 30px 30px;
+    border-radius: 1%;
+    margin-top: 0;
+}
+
+#addConnection button {
+    font-size: 1.0em;
+    background-color: #0274d6;
+    padding: 10px 30px 10px 30px;
+    margin-right: 0;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+#addConnection button:hover {
+    padding: 12px 32px 12px 32px;
+}
+
+#myContact {
+    width: 75vh;
+}
