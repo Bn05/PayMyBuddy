@@ -23,6 +23,7 @@ public class ContactController {
     public String contactPage(Authentication authentication,
                               @RequestParam(required = false, value = "alwaysYourContact") boolean alwaysYourContact,
                               @RequestParam(required = false, value = "noCustomer") boolean noCustomer,
+                              @RequestParam(required = false, value = "itsYou") boolean itsYou,
                               Model model
     ) {
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
@@ -33,6 +34,7 @@ public class ContactController {
         model.addAttribute("alwaysYourContact", alwaysYourContact);
         model.addAttribute("noCustomer", noCustomer);
         model.addAttribute("userContacts", userContacts);
+        model.addAttribute("itsYou", itsYou);
 
         return "contactPage";
     }
@@ -48,6 +50,10 @@ public class ContactController {
         if (newContact == null) {
             modelAndView.addObject("noCustomer", true);
             return modelAndView;
+        }
+
+        if (newContact.getUserId() == user.getUserId()) {
+            modelAndView.addObject("itsYou", true);
         }
 
         for (User contact : user.getContacts()) {

@@ -17,10 +17,13 @@ public class HomePageController {
 
     private User user;
 
-
+    @RequestMapping(value = "")
+    public String defaultNoPage() {
+        return "redirect:/profilePage";
+    }
     @RequestMapping(value = "/")
     public String defaultPage() {
-        return "homePage";
+        return "redirect:/profilePage";
     }
 
     @RequestMapping(value = "/homePage")
