@@ -47,8 +47,6 @@
     </div>
 
 
-
-
     <div id="addMoney">
         <form th:action="@{/addMoneyFromMyBankAccount}" method="post">
             <div id="cbInformation">
@@ -56,29 +54,28 @@
                 <ol>
                     <li>
                         <label for=numero_de_carte>N° de carte : </label>
-                        <input id=numero_de_carte name=bankCardId type=number placeholder="numero de carte"
+                        <input id=numero_de_carte name=bankCardId type=number
                                min="1" max="10000"
                                step="1" minlength="3" maxlength="16" required>
                     </li>
                     <li>
                         <label for=securite>Code sécurité : </label>
-                        <input id=securite name=bankCardSecurity type=number placeholder="code de sécurité"
-                               min="1" max="10000"
+                        <input id=securite name=bankCardSecurity type=number
+                               min="1" max="999"
                                step="1" minlength="3" maxlength="3" required>
                     </li>
                     <li>
                         <label for=nom_porteur>Nom du porteur : </label>
-                        <input id=nom_porteur name=bankCardUserName type=text
-                               placeholder="Même nom que sur la carte"
+                        <input id=nom_porteur name=bankCardUserName type=text minlength="3" maxlength="20"
                                required>
                     </li>
                 </ol>
             </div>
 
             <label for="amount">Quel montant souhaitez vous transférer sur votre compte MyPuyBuddy ?</label>
-            <input type="number" id="amount" name="amount" min="0" max="10000" step="0.01" required/>
+            <input type="number" id="amount" name="amount" min="0" step="0.01" required/>
 
-            <p th:if="${validationFromBank}"> la banque a validé votre virement, le montant est maintenant sur votre
+            <p th:if="${validationFromBank}"> La banque a validé votre virement, le montant est maintenant sur votre
                 compte</p>
             <p th:if="${rejectFromBank}"> Malheureusement votre banque n'a pas validé le montant. Merci de vous
                 rapprocher de cette dernière</p>
@@ -91,23 +88,26 @@
     </div>
 
     <div id="trasnfereToMyBankAccount">
+        <h3>Transférer vers votre compte bancaire</h3>
         <form th:action="@{/addMoneyToMyBankAccount}" method="post">
-            <fieldset>
-                <legend>Transférer sur mon compte en Banque</legend>
-                <label for="iban"></label>
-                <input type="TEXT" id="iban" name="iban" required/>
-                <label for="amountToBank"></label>
-                <input type="number" id="amountToBank" name="amount" min="1" step="0.01" required/>
+
+            <label for="iban"></label>
+            <input type="TEXT" id="iban" name="iban" placeholder="Votre Iban" required/>
+            <label for="amountToBank"></label>
+            <input type="number" id="amountToBank" name="amount" placeholder="0€" min="1"
+                   step="0.01" required/><br/>
+            <div id="buttonSend">
                 <button type="submit">Valider</button>
-            </fieldset>
+            </div>
+
         </form>
         <div id="validation Commission" th:if="${validationCommission}"> Vous avez demandé a effectuer un virement de
             <span
-                    th:text="${amountToBank}?:'null'"/> <br/>
+                    th:text="${amountToBank}?:'null'"/>€. <br/>
             Comme annoncé dans nos conditions générales, nous allons y appliquer une commission de 5%. La commission
             sera
-            donc de <span th:text="${commissionRound}?:'nulll'"/>€ <br>
-            Et Vous receverez un montant de <span th:text="${amountLessCommission}?:'nulll'"/>€
+            donc de <span th:text="${commissionRound}?:'nulll'"/>€. <br>
+            Un montant de <span th:text="${amountLessCommission}?:'nulll'"/>€ sera transféré sur votre compte bancaire.
 
             <div id="choice">
 

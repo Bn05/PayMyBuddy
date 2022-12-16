@@ -103,4 +103,69 @@ section {
 
 #myContact {
     width: 75vh;
+
 }
+
+#myContact h3 {
+    padding: 0;
+    margin: 0;
+}
+
+#myContactTable{
+    width: 75vh;
+    border: solid black;
+}
+
+#myContact table {
+    border-collapse: collapse;
+    display: table;
+    width: 75vh;
+
+
+}
+
+#myContact thead {
+    display: table-row-group;
+    height: 10vh;
+    text-align: center;
+}
+
+#myContact th {
+
+    background-color: #5bb75b;
+    border: solid #5bb75b;
+    color: white;
+    padding: 20px 0 20px 0;
+}
+
+#myContact tbody {
+    text-align: center;
+
+
+}
+
+#myContact tr:nth-child(odd) {
+    background-color: #f3f3f3;
+    padding: 20px 0 20px 0;
+    height: 10vh;
+}
+
+#myContact tr:nth-child(even) {
+    background-color: white;
+    padding: 20px 0 20px 0;
+    height: 10vh;
+}
+
+#myContact button{
+    font-size: 1.0em;
+    background-color: #0274d6;
+    padding: 10px 30px 10px 30px;
+    margin-right: 0;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+
+
+}
+

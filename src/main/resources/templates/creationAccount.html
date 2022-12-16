@@ -5,32 +5,36 @@
 <head>
     <meta charset="UTF-8">
     <title>Creation Compte</title>
+    <link href="../static/css/creationAccount.css" th:href="@{/css/creationAccount.css}" rel="stylesheet"/>
 </head>
 <body>
+<section>
+    <div id="creationAccount">
 
-<h1>Creation de compte</h1>
+        <h1 id="bigLogo">Pay My Buddy</h1>
 
-<form method="post" th:action="@{/creationAccount}" th:object="${user}">
-  <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}"></p>
-  <label > firstName </label>
-  <input type="text" th:field="*{firstName}"><br>
-  <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"></p>
-  <label > lastName </label>
-  <input type="text" th:field="*{lastName}"><br>
-  <p th:if="${#fields.hasErrors('birthdate')}" th:errorclass="error" th:errors="*{birthdate}"></p>
-  <label > birthdate </label>
-  <input type="date" th:field="*{birthdate}"><br>
-  <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>
-  <label > email </label>
-  <input type="email" th:field="*{email}"><br>
-  <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}"></p>
-  <label > address </label>
-  <input type="text" th:field="*{address}"><br>
-  <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
-  <label > password </label>
-  <input type="password" th:field="*{password}"><br>
-  <button type="submit">Créer</button>
-</form>
-
+        <form method="post" th:action="@{/creationAccount}" th:object="${user}">
+            <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}"></p>
+            <label> firstName </label>
+            <input type="text" th:field="*{firstName}"><br>
+            <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"></p>
+            <label> lastName </label>
+            <input type="text" th:field="*{lastName}"><br>
+            <p th:if="${#fields.hasErrors('birthdate')}" th:errorclass="error" th:errors="*{birthdate}"></p>
+            <label> birthdate </label>
+            <input type="date" th:field="*{birthdate}"><br>
+            <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>
+            <label> email </label>
+            <input type="email" th:field="*{email}"><br>
+            <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}"></p>
+            <label> address </label>
+            <input type="text" th:field="*{address}"><br>
+            <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
+            <label> password </label>
+            <input type="password" th:field="*{password}"><br>
+            <button type="submit">Créer</button>
+        </form>
+    </div>
+</section>
 </body>
 </html>

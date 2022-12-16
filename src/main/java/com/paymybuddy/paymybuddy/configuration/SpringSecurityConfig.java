@@ -45,6 +45,10 @@ public class SpringSecurityConfig {
                 .userDetailsService(jpaUserDetailsService)
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+                .deleteCookies("JSESSIONID")
+                .and()
+                .rememberMe()
+                .key("uniqueAndSecret")
                 .and()
                 .build();
     }

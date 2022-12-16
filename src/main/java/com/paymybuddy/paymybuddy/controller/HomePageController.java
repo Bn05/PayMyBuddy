@@ -31,13 +31,13 @@ public class HomePageController {
 
 
         model.addAttribute("user", user);
-        return "/homePage";
+        return "homePage";
     }
 
 
     @GetMapping(value = "/adminPage")
     public String adminPage() {
-        return "/adminPAge";
+        return "adminPAge";
     }
 
 

@@ -43,7 +43,7 @@ public class ContactController {
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
         User user = securityUser.getUser();
         User newContact = userService.getUserByEmail(email).orElse(null);
-        ModelAndView modelAndView = new ModelAndView("redirect:/contactPage");
+        ModelAndView modelAndView = new ModelAndView("redirect:contactPage");
 
         if (newContact == null) {
             modelAndView.addObject("noCustomer", true);

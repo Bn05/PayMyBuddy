@@ -51,14 +51,15 @@
 
 
     <div id="myContact">
-        <fieldset>
-            <legend> Mes contacts</legend>
+        <h3>Mes Contacts</h3>
+        <div id="myContactTable">
             <table>
                 <thead>
                 <tr>
                     <th> Nom</th>
                     <th> Prenom</th>
                     <th> Email</th>
+                    <th></th>
                 </thead>
                 <tbody>
                 <tr th:each="contact : ${userContacts}">
@@ -70,14 +71,10 @@
                             <button class="btn btn-danger">Supprimer</button>
                         </a>
                     </td>
-
                 </tr>
-
-
                 </tbody>
             </table>
-        </fieldset>
-
+        </div>
     </div>
 
 

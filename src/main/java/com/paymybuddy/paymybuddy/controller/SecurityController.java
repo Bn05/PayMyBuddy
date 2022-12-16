@@ -35,7 +35,7 @@ public class SecurityController {
 
         model.addAttribute("user", user);
 
-        return "/creationAccount";
+        return "creationAccount";
     }
 
     @PostMapping(value = "/creationAccount")
@@ -43,7 +43,7 @@ public class SecurityController {
                            BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "/creationAccount";
+            return "creationAccount";
         }
         userService.saveUser(user);
         return ("redirect:/validateCreationAccount");

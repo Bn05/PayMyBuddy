@@ -67,7 +67,7 @@ public class ProfileController {
         model.addAttribute("walletToLow", walletToLow);
         model.addAttribute("commissionRound", commissionRound);
 
-        return "/profilePage";
+        return "profilePage";
     }
 
     @RequestMapping(value = "/profilePage/modif")
@@ -79,7 +79,7 @@ public class ProfileController {
         model.addAttribute("birthdate", bithdate);
 
 
-        return "/profilePageModif";
+        return "profilePageModif";
     }
 
 

@@ -5,60 +5,56 @@
 <head>
     <meta charset="UTF-8">
     <title>profilePageModif</title>
+    <link href="../static/css/profilePageModif.css" th:href="@{/css/profilePageModif.css}" rel="stylesheet"/>
 </head>
+
+
 <body>
 <header>
-    <div id="logo"> Pay My Buddy</div>
-    <div id="menu">
-        <ul>
-            <li><a href="/homePage">Home</a></li>
-            <li><a href="/transferPage"> Transfer</a></li>
-            <li><a href="/profilePage"> Profile </a></li>
-            <li><a href="/contactPage">Contact </a></li>
-            <li><a href="/logout">Log off </a></li>
+    <div id="top">
+        <div id="logo"> Pay My Buddy</div>
+        <div id="menu">
+            <ul>
+                <li><a href="/homePage">Home</a></li>
+                <li><a href="/transferPage"> Transfer</a></li>
+                <li><a href="/profilePage"> Profile </a></li>
+                <li><a href="/contactPage">Contact </a></li>
+                <li><a href="/logout">Log off </a></li>
 
-        </ul>
+
+            </ul>
+        </div>
     </div>
-    <div id="path">Home / Profile</div>
+
+    <div id="path">
+        <div id="path_path">Profile / <span id="path_now">Transfer</span></div>
+    </div>
 </header>
+
+
 <div id="myInfo">
     <form method="post" th:action="@{/updateAccount}" th:object="${user}">
-        <ul>
-            <li>
-                <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}"></p>
-                <label for="firstName">FirstName : </label><input type="text" th:placeholder="${user.firstName}"
-                                                                  th:field="*{firstName}"
-            >
-            </li>
-            <li>
-                <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"></p>
-                <label for="lastName"></label>LastName : <input type="text" th:field="*{lastName}"
-                                                                th:placeholder="${user.lastName}"
-            >
-            </li>
-            <li>
-                <p th:if="${#fields.hasErrors('birthdate')}" th:errorclass="error" th:errors="*{birthdate}"></p>
-                <label for="birthdate"></label>Birthdate : <input type="text" th:placeholder="${birthdate}"
-                                                                  onfocus="(this.type='date')" th:field="*{birthdate}"
+        <p th:if="${#fields.hasErrors('firstName')}" th:errorclass="error" th:errors="*{firstName}"></p>
+        <label> firstName </label>
+        <input type="text" th:field="*{firstName}"><br>
+        <p th:if="${#fields.hasErrors('lastName')}" th:errorclass="error" th:errors="*{lastName}"></p>
+        <label> lastName </label>
+        <input type="text" th:field="*{lastName}"><br>
+        <p th:if="${#fields.hasErrors('birthdate')}" th:errorclass="error" th:errors="*{birthdate}"></p>
+        <label> birthdate </label>
+        <input type="date" th:field="*{birthdate}"><br>
+        <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>
+        <label> email </label>
+        <input type="email" th:field="*{email}"><br>
+        <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}"></p>
+        <label> address </label>
+        <input type="text" th:field="*{address}"><br>
+        <p th:if="${#fields.hasErrors('password')}" th:errorclass="error" th:errors="*{password}"></p>
+        <label> password </label>
+        En construction - entrez votre mdp actuel
+        <input type="password" th:field="*{password}"><br>
 
-            >
-            </li>
 
-            <li>
-                <p th:if="${#fields.hasErrors('email')}" th:errorclass="error" th:errors="*{email}"></p>
-                <label for="email"></label>Email : <input type="email" th:field="*{email}"
-                                                          th:placeholder="${user.email}">
-            </li>
-            <li>
-                <p th:if="${#fields.hasErrors('address')}" th:errorclass="error" th:errors="*{address}"></p>
-                <label for="address"></label>Address : <input type="text" th:field="*{address}"
-                                                              th:placeholder="${user.address}">
-            </li>
-
-            <li>
-                <label for="password">Entrez votre mot de passe pour valider les modifications</label>Password : <input type="password" th:field="*{password}">
-            </li>
-        </ul>
         <button type="submit">Modifier</button>
     </form>
 

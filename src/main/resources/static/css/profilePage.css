@@ -112,44 +112,80 @@ section {
 #addMoney {
     border-radius: 1%;
     margin-top: 15px;
-    min-height: 20vh;
     width: 75vh;
     background-color: #f3f3f3;
 }
 
-#addMoney form{
-
-}
-
 #addMoney ol {
     list-style: none;
+
 }
 
 #addMoney li {
     display: flex;
     justify-content: space-between;
     width: 35vh;
+
 }
 
-#buttonSend{
-    width: 75vh;
+#addMoney input {
+    width: 150px;
+}
+
+
+#buttonSend {
     display: flex;
     flex-direction: row-reverse;
+    margin-top: 20px;
+    margin-right: 5px;
 }
 
 #addMoney button {
     font-size: 1.0em;
     background-color: #0274d6;
     padding: 10px 30px 10px 30px;
-    margin-top: 10px;
-    margin-right: 5px;
     margin-bottom: 5px;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     color: white;
     cursor: pointer;
 }
 
+#trasnfereToMyBankAccount {
+    border-radius: 1%;
+    margin-top: 15px;
+    width: 75vh;
+    background-color: #f3f3f3;
+}
+
+#trasnfereToMyBankAccount button {
+    font-size: 1.0em;
+    background-color: #0274d6;
+    padding: 10px 30px 10px 30px;
+    margin-bottom: 5px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+#choice {
+    display: flex;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#choice input{
+    font-size: 1.0em;
+    background-color: #0274d6;
+    padding: 10px 30px 10px 30px;
+    margin-left: 30px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+
+}
 
 
 
