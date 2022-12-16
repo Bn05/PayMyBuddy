@@ -54,6 +54,7 @@ public class ContactController {
 
         if (newContact.getUserId() == user.getUserId()) {
             modelAndView.addObject("itsYou", true);
+            return modelAndView;
         }
 
         for (User contact : user.getContacts()) {
