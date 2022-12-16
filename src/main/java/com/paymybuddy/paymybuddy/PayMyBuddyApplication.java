@@ -19,6 +19,7 @@ public class PayMyBuddyApplication {
     }
 
     // TODO : Gerer la modification de mot de passe
+    // TODO : contact add sois meme possible à corriger
 
     // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin
 
