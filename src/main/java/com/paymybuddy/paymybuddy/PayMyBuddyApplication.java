@@ -19,28 +19,29 @@ public class PayMyBuddyApplication {
     }
 
     // TODO : Gerer la modification de mot de passe
-    // TODO : contact add sois meme possible à corriger
-
+    // TODO : date d'anniversaire futur
     // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin
 
-    // TODO: test unitaire
-    // TODO: test d'integration
+    // TODO : test unitaire
+    // TODO : test d'integration
 
-    // TODO: javadoc
-    // TODO: readme
+    // TODO : readme
+    // TODO : diagramme uml
+
+    // TODO : refactoriser code !!
+    // TODO : javadoc
+    // TODO : supprimer AUTORWIRED
+
     // TODO: spotbug
     // TODO: jacoco
     // TODO: pom.xml
-    //TODO : supprimer AUTORWIRED
-    //TODO : refactoriser code !!
-    //TODO : Actualisation de la base de donnée
 
 
-    // TODO: gestion de la deconnexion
-    // TODO: test end to end
+    // TODO : gestion de la deconnexion
+    // TODO : test end to end
     // TODO : affiner VARCHAR
 
 
-    // TODO: oath2
+    // TODO : oath2
 
 }
