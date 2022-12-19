@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +37,7 @@ public class TransferPageController {
     User user;
 
 
-    @RequestMapping(value = "/transferPage")
+    @GetMapping(value = "/transferPage")
     public String transferPage(Authentication authentication,
                                Model model,
                                @RequestParam("page") Optional<Integer> page,
@@ -59,7 +60,7 @@ public class TransferPageController {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(3);
 
-        Page<Transaction> transactionPage = transactionService.findTransactionPage(user, PageRequest.of(currentPage - 1, pageSize));
+        Page<Transaction> transactionPage = transactionService.findTransactionPage(user,PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("transactionPage", transactionPage);
 
@@ -73,7 +74,6 @@ public class TransferPageController {
 
         return "transferPage";
     }
-
 
     @RequestMapping(value = "/addTransaction")
     public ModelAndView addTransaction(
