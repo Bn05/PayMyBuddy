@@ -102,9 +102,8 @@
 
         </form>
         <div id="validation Commission" th:if="${validationCommission}"> Vous avez demandé a effectuer un virement de
-            <span
-                    th:text="${amountToBank}?:'null'"/>€. <br/>
-            Comme annoncé dans nos conditions générales, nous allons y appliquer une commission de 5%. La commission
+            <span th:text="${amountToBank}?:'null'"/>€. <br/>
+            Comme annoncé dans nos conditions générales, nous allons y appliquer une commission de <span th:text="${commissionPerCent}?:'nulll'"/>% . La commission
             sera
             donc de <span th:text="${commissionRound}?:'nulll'"/>€. <br>
             Un montant de <span th:text="${amountLessCommission}?:'nulll'"/>€ sera transféré sur votre compte bancaire.

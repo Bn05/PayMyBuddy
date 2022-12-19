@@ -35,7 +35,7 @@ public class SpringSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .authorizeHttpRequests()
-                .requestMatchers("/css/**","/creationAccount", "/saveUser","/validateCreationAccount", "/TESTcontactPAGE").permitAll()
+                .requestMatchers("/css/**", "/creationAccount", "/saveUser", "/validateCreationAccount", "/TESTcontactPAGE").permitAll()
                 .requestMatchers("/adminPage").hasAnyAuthority("ADMIN")
                 .anyRequest().authenticated()
                 .and()
@@ -44,16 +44,14 @@ public class SpringSecurityConfig {
                 .and()
                 .userDetailsService(jpaUserDetailsService)
                 .logout()
+                .invalidateHttpSession(true).clearAuthentication(true)
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
-                .deleteCookies("JSESSIONID")
                 .and()
                 .rememberMe()
                 .key("uniqueAndSecret")
                 .and()
                 .build();
     }
-
-
 }
 
 

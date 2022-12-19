@@ -29,7 +29,8 @@ Check that you have :
 4. Package the application (fat jar file)
    ```sh
    mvn clean package
-   ```
+      ```
+
 5. Execute the jar file
    ```sh
    java -jar ./target/paymybuddy-0.0.1-SNAPSHOT.jar

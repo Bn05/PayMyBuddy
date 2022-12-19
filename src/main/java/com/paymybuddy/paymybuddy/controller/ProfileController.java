@@ -4,6 +4,7 @@ import com.paymybuddy.paymybuddy.model.SecurityUser;
 import com.paymybuddy.paymybuddy.model.Transaction;
 import com.paymybuddy.paymybuddy.model.User;
 import com.paymybuddy.paymybuddy.service.BankServive;
+import com.paymybuddy.paymybuddy.service.FacturationService;
 import com.paymybuddy.paymybuddy.service.TransactionService;
 import com.paymybuddy.paymybuddy.service.UserService;
 import jakarta.validation.Valid;
@@ -16,6 +17,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import static java.lang.Math.round;
 
@@ -30,6 +33,9 @@ public class ProfileController {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    FacturationService facturationService;
 
     private User user;
     private User payMyBuddy;
@@ -48,6 +54,7 @@ public class ProfileController {
                               @RequestParam(required = false, value = "amountToBank") String amountToBank,
                               @RequestParam(required = false, value = "amountLessCommission") String amountLessCommission,
                               @RequestParam(required = false, value = "commissionRound") String commissionRound,
+                              @RequestParam(required = false, value = "commissionPerCent") String commissionPerCent,
                               @RequestParam(required = false, value = "walletToLow") boolean walletToLow
 
 
@@ -66,6 +73,7 @@ public class ProfileController {
         model.addAttribute("amountLessCommission", amountLessCommission);
         model.addAttribute("walletToLow", walletToLow);
         model.addAttribute("commissionRound", commissionRound);
+        model.addAttribute("commissionPerCent",commissionPerCent);
 
         return "profilePage";
     }
@@ -74,7 +82,6 @@ public class ProfileController {
     public String profilePageModif(Model model) {
 
         String bithdate = user.getBirthdate().toString();
-
         model.addAttribute("user", user);
         model.addAttribute("birthdate", bithdate);
 
@@ -141,20 +148,13 @@ public class ProfileController {
 
         if (user.getWallet() > amountTransaction) {
 
-            double amountTransactionDouble = amountTransaction;
-            double commissionPercent = 5.00;
-            double commission = amountTransactionDouble * ((commissionPercent) / 100);
-
-            double commissionRound = round(commission * 100.00) / 100.00;
-            commissionRoundFloat = (float) commissionRound;
-
-            double amountLessCommission = amount - commissionRound;
-
+            Map<String, Double> resultMap =  facturationService.getCommission(amountTransaction);
 
             modelAndView.addObject("validationCommission", true);
             modelAndView.addObject("amountToBank", String.valueOf(amount));
-            modelAndView.addObject("amountLessCommission", amountLessCommission);
-            modelAndView.addObject("commissionRound", commissionRound);
+            modelAndView.addObject("amountLessCommission", resultMap.get("amountLessCommission"));
+            modelAndView.addObject("commissionRound", resultMap.get("commissionRound"));
+            modelAndView.addObject("commissionPerCent", resultMap.get("commissionPerCent") );
 
         } else {
             modelAndView.addObject("walletToLow", true);

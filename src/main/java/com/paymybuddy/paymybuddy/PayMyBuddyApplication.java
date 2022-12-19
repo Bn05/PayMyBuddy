@@ -12,30 +12,18 @@ public class PayMyBuddyApplication {
         SpringApplication.run(PayMyBuddyApplication.class, args);
     }
 
-    // TODO : Gerer la modification de mot de passe
+    // TODO : Gerer la modification de mot de passe use DTO
     // TODO : date d'anniversaire futur
-    // TODO : Creation page Admin // VUe d'ensemble, creation nouvel admin
-
-    // TODO : test unitaire
-    // TODO : test d'integration
-
-    // TODO : readme
-    // TODO : diagramme uml
-
     // TODO : refactoriser code !!
+    // TODO: spotbug
+    // TODO : Logger
     // TODO : javadoc
     // TODO : supprimer AUTORWIRED
 
-    // TODO: spotbug
+
+    // TODO : test unitaire
+    // TODO : test d'integration
     // TODO: jacoco
-    // TODO: pom.xml
-
-
-    // TODO : gestion de la deconnexion
     // TODO : test end to end
-    // TODO : affiner VARCHAR
-
-
-    // TODO : oath2
 
 }
