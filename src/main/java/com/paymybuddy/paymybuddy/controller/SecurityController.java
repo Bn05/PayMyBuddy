@@ -19,11 +19,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class SecurityController {
 
-    @Autowired
+    final
     TransactionService transactionService;
 
-    @Autowired
+    final
     UserService userService;
+
+    public SecurityController(TransactionService transactionService, UserService userService) {
+        this.transactionService = transactionService;
+        this.userService = userService;
+    }
 
     @RequestMapping("/login")
     public String login() {

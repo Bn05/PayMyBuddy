@@ -72,6 +72,20 @@ public class User {
     )
     private Collection<Role> roles = new ArrayList<>();
 
+    public User() {
+    }
+
+    public User(String firstName, String lastName, LocalDate birthdate, String email, String address, float wallet, String password, List<User> contacts) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthdate = birthdate;
+        this.email = email;
+        this.address = address;
+        this.wallet = wallet;
+        this.password = password;
+        this.contacts = contacts;
+    }
+
     public int getUserId() {
         return userId;
     }

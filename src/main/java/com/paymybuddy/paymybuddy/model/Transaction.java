@@ -44,32 +44,12 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public int getTransactionId() {
-        return transactionId;
-    }
-
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
-    }
-
-    public User getSenderUser() {
-        return senderUser;
-    }
-
     public void setSenderUser(User senderUser) {
         this.senderUser = senderUser;
     }
 
-    public User getReceivingUser() {
-        return receivingUser;
-    }
-
     public void setReceivingUser(User receivingUser) {
         this.receivingUser = receivingUser;
-    }
-
-    public LocalDate getTransactionDate() {
-        return transactionDate;
     }
 
     public void setTransactionDate(LocalDate transactionDate) {
@@ -82,10 +62,6 @@ public class Transaction {
 
     public void setAmount(float amount) {
         this.amount = amount;
-    }
-
-    public String getComment() {
-        return comment;
     }
 
     public void setComment(String comment) {

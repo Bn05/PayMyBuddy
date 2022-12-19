@@ -13,17 +13,14 @@ public class PayMyBuddyApplication {
     }
 
     // TODO : Gerer la modification de mot de passe use DTO
-    // TODO : date d'anniversaire futur
-    // TODO : refactoriser code !!
+
     // TODO: spotbug
     // TODO : Logger
     // TODO : javadoc
-    // TODO : supprimer AUTORWIRED
 
 
     // TODO : test unitaire
-    // TODO : test d'integration
     // TODO: jacoco
-    // TODO : test end to end
+    // TODO / @Transactional
 
 }

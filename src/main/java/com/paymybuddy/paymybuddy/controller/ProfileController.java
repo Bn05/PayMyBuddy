@@ -3,10 +3,7 @@ package com.paymybuddy.paymybuddy.controller;
 import com.paymybuddy.paymybuddy.model.SecurityUser;
 import com.paymybuddy.paymybuddy.model.Transaction;
 import com.paymybuddy.paymybuddy.model.User;
-import com.paymybuddy.paymybuddy.service.BankServive;
-import com.paymybuddy.paymybuddy.service.FacturationService;
-import com.paymybuddy.paymybuddy.service.TransactionService;
-import com.paymybuddy.paymybuddy.service.UserService;
+import com.paymybuddy.paymybuddy.service.*;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,16 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
-import java.util.HashMap;
 import java.util.Map;
 
-import static java.lang.Math.round;
 
 @Controller
 public class ProfileController {
 
     @Autowired
-    BankServive bankServive;
+    BankService bankService;
 
     @Autowired
     UserService userService;
@@ -73,7 +68,7 @@ public class ProfileController {
         model.addAttribute("amountLessCommission", amountLessCommission);
         model.addAttribute("walletToLow", walletToLow);
         model.addAttribute("commissionRound", commissionRound);
-        model.addAttribute("commissionPerCent",commissionPerCent);
+        model.addAttribute("commissionPerCent", commissionPerCent);
 
         return "profilePage";
     }
@@ -97,6 +92,7 @@ public class ProfileController {
         if (bindingResult.hasErrors()) {
             return "/profilePageModif";
         }
+
         user.setFirstName(updateUser.getFirstName());
         user.setLastName(updateUser.getLastName());
         user.setBirthdate(updateUser.getBirthdate());
@@ -122,7 +118,7 @@ public class ProfileController {
     ) {
         ModelAndView modelAndView = new ModelAndView("redirect:/profilePage");
 
-        if (bankServive.bankValidation(bankCardId, bankCardSecurity, bankCardUserName, amount)) {
+        if (bankService.bankValidation(bankCardId, bankCardSecurity, bankCardUserName, amount)) {
 
             user.setWallet(user.getWallet() + amount);
             userService.updateUser(user);
@@ -148,13 +144,13 @@ public class ProfileController {
 
         if (user.getWallet() > amountTransaction) {
 
-            Map<String, Double> resultMap =  facturationService.getCommission(amountTransaction);
+            Map<String, Double> resultMap = facturationService.getCommission(amountTransaction);
 
             modelAndView.addObject("validationCommission", true);
             modelAndView.addObject("amountToBank", String.valueOf(amount));
             modelAndView.addObject("amountLessCommission", resultMap.get("amountLessCommission"));
             modelAndView.addObject("commissionRound", resultMap.get("commissionRound"));
-            modelAndView.addObject("commissionPerCent", resultMap.get("commissionPerCent") );
+            modelAndView.addObject("commissionPerCent", resultMap.get("commissionPerCent"));
 
         } else {
             modelAndView.addObject("walletToLow", true);

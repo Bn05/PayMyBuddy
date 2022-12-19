@@ -6,7 +6,6 @@ import com.paymybuddy.paymybuddy.model.Transaction;
 import com.paymybuddy.paymybuddy.model.User;
 import com.paymybuddy.paymybuddy.service.TransactionService;
 import com.paymybuddy.paymybuddy.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.Authentication;
@@ -25,10 +24,16 @@ import java.util.stream.IntStream;
 @Controller
 public class TransferPageController {
 
-    @Autowired
+    final
     TransactionService transactionService;
-    @Autowired
-    private UserService userService;
+    private final UserService userService;
+
+    public TransferPageController(TransactionService transactionService, UserService userService) {
+        this.transactionService = transactionService;
+        this.userService = userService;
+    }
+
+    User user;
 
 
     @RequestMapping(value = "/transferPage")
@@ -39,30 +44,22 @@ public class TransferPageController {
                                @RequestParam(required = false, value = "walletIsToLow") boolean walletIsToLow
     ) {
 
-        //Security Param ///
+
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        User user = securityUser.getUser();
+        user = securityUser.getUser();
 
         model.addAttribute("walletIsToLow", walletIsToLow);
 
-        // End of Security Param //
-
-        //Send Money//
         List<User> contacts = user.getContacts();
         model.addAttribute("contacts", contacts);
 
         Transaction transactionRequest = new Transaction();
         model.addAttribute("transactionRequest", transactionRequest);
 
-
-        // END OF SEND MONEY//
-
-
-        // Transaction LIST Start ////
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(3);
 
-        Page<Transaction> transactionPage = transactionService.findTransactionPage(user,PageRequest.of(currentPage - 1, pageSize));
+        Page<Transaction> transactionPage = transactionService.findTransactionPage(user, PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("transactionPage", transactionPage);
 
@@ -74,20 +71,17 @@ public class TransferPageController {
             model.addAttribute("pageNumbers", pageNumbers);
         }
 
-        //// End Of Transaction////
-
         return "transferPage";
     }
 
+
     @RequestMapping(value = "/addTransaction")
-    public ModelAndView addTransaction(Authentication authentication,
+    public ModelAndView addTransaction(
                                        @RequestParam(value = "contact") int receivingUserId,
                                        @RequestParam(value = "amount") float amount,
                                        @RequestParam(value = "comment") String comment
     ) {
-
-        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        User senderUser = securityUser.getUser();
+        User senderUser = user;
         ModelAndView modelAndView = new ModelAndView("redirect:/transferPage");
 
         User receivingUser = userService.getUser(receivingUserId);

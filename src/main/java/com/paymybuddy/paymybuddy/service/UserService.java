@@ -9,17 +9,21 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private RoleRepository roleRepository;
+    private final RoleRepository roleRepository;
+
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+        this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+    }
 
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -29,7 +33,6 @@ public class UserService {
         return userRepository.findById(id).get();
     }
 
-    public Iterable<User> findAllUser(){return userRepository.findAll();}
 
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
@@ -59,4 +62,24 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void addContact(User user, String email) {
+        List<User> contacts = user.getContacts();
+        User newContact = userRepository.findByEmail(email).get();
+        contacts.add(newContact);
+
+        updateUser(user);
+    }
+
+    public void deleteContact(User user, String email) {
+
+        List<User> contacts = user.getContacts();
+
+        for (User contact : contacts) {
+            if (contact.getEmail().equals(email)) {
+                contacts.remove(contact);
+                break;
+            }
+        }
+        updateUser(user);
+    }
 }

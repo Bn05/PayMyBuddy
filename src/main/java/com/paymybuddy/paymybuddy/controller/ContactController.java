@@ -3,7 +3,6 @@ package com.paymybuddy.paymybuddy.controller;
 import com.paymybuddy.paymybuddy.model.SecurityUser;
 import com.paymybuddy.paymybuddy.model.User;
 import com.paymybuddy.paymybuddy.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,13 +10,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class ContactController {
 
-    @Autowired
-    public UserService userService;
+    public final UserService userService;
+
+    public ContactController(UserService userService) {
+        this.userService = userService;
+    }
+
+    private User user;
 
     @RequestMapping(value = "/contactPage")
     public String contactPage(Authentication authentication,
@@ -27,7 +30,7 @@ public class ContactController {
                               Model model
     ) {
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        User user = securityUser.getUser();
+        user = securityUser.getUser();
 
         Iterable<User> userContacts = user.getContacts();
 
@@ -41,9 +44,8 @@ public class ContactController {
 
 
     @RequestMapping(value = "/addContact")
-    public ModelAndView addContact(Authentication authentication, Model model, @RequestParam(value = "email") String email) {
-        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        User user = securityUser.getUser();
+    public ModelAndView addContact(@RequestParam(value = "email") String email) {
+
         User newContact = userService.getUserByEmail(email).orElse(null);
         ModelAndView modelAndView = new ModelAndView("redirect:contactPage");
 
@@ -64,31 +66,17 @@ public class ContactController {
             }
         }
 
-        List<User> contacts = user.getContacts();
-        contacts.add(newContact);
-        userService.updateUser(user);
+        userService.addContact(user, email);
 
         return modelAndView;
-
     }
 
     @GetMapping(value = "/contactPage/deleteContact")
-    public String deleteContact(Authentication authentication,
+    public String deleteContact(
                                 @RequestParam(value = "email") String email
     ) {
-        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        User user = securityUser.getUser();
-        List<User> contacts = user.getContacts();
+       userService.deleteContact(user, email);
 
-        for (User contact : contacts) {
-            if (contact.getEmail().equals(email)) {
-                contacts.remove(contact);
-                break;
-            }
-        }
-
-        user.setContacts(contacts);
-        userService.updateUser(user);
         return "redirect:/contactPage";
     }
 
