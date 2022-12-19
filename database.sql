@@ -21,11 +21,13 @@ CREATE TABLE user
 CREATE TABLE transaction
 (
     transaction_id      INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    sender_user_id      INTEGER      NOT NULL REFERENCES user (user_Id),
-    receiving_user_id   INTEGER      NOT NULL REFERENCES user (user_Id),
+    sender_user_id      INTEGER      NOT NULL,
+    receiving_user_id   INTEGER      NOT NULL,
     transaction_date    DATE         NOT NULL,
     transaction_comment VARCHAR(255) NOT NULL,
-    transaction_amount  FLOAT        NOT NULL
+    transaction_amount  FLOAT        NOT NULL,
+    FOREIGN KEY (sender_user_id) REFERENCES user (user_Id),
+    FOREIGN KEY (receiving_user_id) REFERENCES user (user_Id)
 );
 
 CREATE TABLE user_user
