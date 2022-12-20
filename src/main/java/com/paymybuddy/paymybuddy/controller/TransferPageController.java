@@ -29,13 +29,12 @@ public class TransferPageController {
     TransactionService transactionService;
     private final UserService userService;
 
+
+
     public TransferPageController(TransactionService transactionService, UserService userService) {
         this.transactionService = transactionService;
         this.userService = userService;
     }
-
-    User user;
-
 
     @GetMapping(value = "/transferPage")
     public String transferPage(Authentication authentication,
@@ -45,9 +44,7 @@ public class TransferPageController {
                                @RequestParam(required = false, value = "walletIsToLow") boolean walletIsToLow
     ) {
 
-
-        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        user = securityUser.getUser();
+        User user = userService.getCurrentUser(authentication);
 
         model.addAttribute("walletIsToLow", walletIsToLow);
 
@@ -76,12 +73,12 @@ public class TransferPageController {
     }
 
     @RequestMapping(value = "/addTransaction")
-    public ModelAndView addTransaction(
+    public ModelAndView addTransaction(Authentication authentication,
                                        @RequestParam(value = "contact") int receivingUserId,
                                        @RequestParam(value = "amount") float amount,
                                        @RequestParam(value = "comment") String comment
     ) {
-        User senderUser = user;
+        User senderUser = userService.getCurrentUser(authentication);
         ModelAndView modelAndView = new ModelAndView("redirect:/transferPage");
 
         User receivingUser = userService.getUser(receivingUserId);
@@ -109,10 +106,8 @@ public class TransferPageController {
         } else {
             modelAndView.addObject("walletIsToLow", true);
         }
-
         return modelAndView;
-
-
     }
+
 
 }

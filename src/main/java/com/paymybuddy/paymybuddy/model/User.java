@@ -86,6 +86,9 @@ public class User {
         this.contacts = contacts;
     }
 
+    public User(User user) {
+    }
+
     public int getUserId() {
         return userId;
     }
