@@ -3,6 +3,7 @@ package com.paymybuddy.paymybuddy.controller;
 import com.paymybuddy.paymybuddy.model.SecurityUser;
 import com.paymybuddy.paymybuddy.model.Transaction;
 import com.paymybuddy.paymybuddy.model.User;
+import com.paymybuddy.paymybuddy.service.TransactionService;
 import com.paymybuddy.paymybuddy.service.UserService;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -27,7 +30,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user;
@@ -41,16 +45,17 @@ public class TransferPageControllerTest {
     @Autowired
     public MockMvc mockMvc;
 
-    @InjectMocks
-    TransferPageController transferPageController;
-
-    @Mock
+    @MockBean
     UserService userServiceMock;
+
+    @MockBean
+    TransactionService transactionServiceMock;
 
     User user1;
     User user2;
-
     Transaction transaction1;
+
+    Page<Transaction> transactionPage;
 
 
     @BeforeAll
@@ -61,11 +66,19 @@ public class TransferPageControllerTest {
         contacts.add(user2);
         user1.setContacts(contacts);
         transaction1 = new Transaction(user1, user2, LocalDate.of(2022, 12, 20), "comtest", 15.0f);
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.add(transaction1);
+
+        transactionPage = new PageImpl<>(transactions);
+
     }
 
 
     @Test
     public void transferPage() throws Exception {
+
+        when(userServiceMock.getCurrentUser(any())).thenReturn(user1);
+        when(transactionServiceMock.findTransactionPage(any(),any())).thenReturn(transactionPage);
 
         mockMvc.perform(get("/transferPage").with(user(new SecurityUser(user1)))
                         .param("page", "1")
@@ -75,7 +88,22 @@ public class TransferPageControllerTest {
     }
 
     @Test
-    public void addTransaction() {
+    public void addTransaction() throws Exception {
+
+        when(userServiceMock.getCurrentUser(any())).thenReturn(user1);
+        when(userServiceMock.getUser(anyInt())).thenReturn(user2);
+
+        doNothing().when(userServiceMock).updateUser(any());
+
+        when(transactionServiceMock.addTransaction(any())).thenReturn(null);
+
+
+        mockMvc.perform(post("/addTransaction").with(user(new SecurityUser(user1)))
+                .param("contact", "1")
+                .param("amount", "10")
+                .param("comment", "testa")
+                .with(csrf())
+        ).andExpect(MockMvcResultMatchers.status().is3xxRedirection());
 
     }
 }

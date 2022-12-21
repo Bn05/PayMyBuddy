@@ -22,15 +22,14 @@ public class ContactController {
 
     private User user;
 
-    @RequestMapping(value = "/contactPage")
+    @GetMapping(value = "/contactPage")
     public String contactPage(Authentication authentication,
                               @RequestParam(required = false, value = "alwaysYourContact") boolean alwaysYourContact,
                               @RequestParam(required = false, value = "noCustomer") boolean noCustomer,
                               @RequestParam(required = false, value = "itsYou") boolean itsYou,
                               Model model
     ) {
-        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        user = securityUser.getUser();
+        user = userService.getCurrentUser(authentication);
 
         Iterable<User> userContacts = user.getContacts();
 
@@ -43,7 +42,7 @@ public class ContactController {
     }
 
 
-    @RequestMapping(value = "/addContact")
+    @PostMapping(value = "/addContact")
     public ModelAndView addContact(@RequestParam(value = "email") String email) {
 
         User newContact = userService.getUserByEmail(email).orElse(null);
@@ -73,9 +72,9 @@ public class ContactController {
 
     @GetMapping(value = "/contactPage/deleteContact")
     public String deleteContact(
-                                @RequestParam(value = "email") String email
+            @RequestParam(value = "email") String email
     ) {
-       userService.deleteContact(user, email);
+        userService.deleteContact(user, email);
 
         return "redirect:/contactPage";
     }

@@ -12,15 +12,12 @@ public class PayMyBuddyApplication {
         SpringApplication.run(PayMyBuddyApplication.class, args);
     }
 
-    // TODO : Gerer la modification de mot de passe use DTO
-
     // TODO: spotbug
     // TODO : Logger
     // TODO : javadoc
 
-
     // TODO : test unitaire
     // TODO: jacoco
-    // TODO / @Transactional
+
 
 }

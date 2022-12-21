@@ -40,7 +40,7 @@ public class ProfileController {
     float commissionRoundFloat;
 
 
-    @RequestMapping(value = "/profilePage")
+    @GetMapping(value = "/profilePage")
     public String profilePage(Authentication authentication,
                               Model model,
                               @RequestParam(required = false, value = "validationFromBank") boolean validationFromBank,
@@ -54,8 +54,7 @@ public class ProfileController {
 
 
     ) {
-        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
-        user = securityUser.getUser();
+        user = userService.getCurrentUser(authentication);
         payMyBuddy = userService.getUser(1);
         yourBank = userService.getUser(2);
 
@@ -73,12 +72,12 @@ public class ProfileController {
         return "profilePage";
     }
 
-    @RequestMapping(value = "/profilePage/modif")
+    @GetMapping(value = "/profilePage/modif")
     public String profilePageModif(Model model) {
 
-        String bithdate = user.getBirthdate().toString();
+        String birthdate = user.getBirthdate().toString();
         model.addAttribute("user", user);
-        model.addAttribute("birthdate", bithdate);
+        model.addAttribute("birthdate", birthdate);
 
 
         return "profilePageModif";

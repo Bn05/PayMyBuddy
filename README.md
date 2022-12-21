@@ -14,7 +14,7 @@ This is a Spring Boot application.
 Check that you have :
 
 * Apache Maven 3.8.6 installed
-* Java 17 installed
+* Java 11 installed
 * mySQL 8.0.30 installed
 
 ### Installation
