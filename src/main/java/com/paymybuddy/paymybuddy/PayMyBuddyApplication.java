@@ -11,13 +11,4 @@ public class PayMyBuddyApplication {
     public static void main(String[] args) {
         SpringApplication.run(PayMyBuddyApplication.class, args);
     }
-
-    // TODO: spotbug
-    // TODO : Logger
-    // TODO : javadoc
-
-    // TODO : test unitaire
-    // TODO: jacoco
-
-
 }

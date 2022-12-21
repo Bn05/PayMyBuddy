@@ -20,17 +20,13 @@ import java.util.Map;
 @Controller
 public class ProfileController {
 
-    @Autowired
-    BankService bankService;
+    private final BankService bankService;
 
-    @Autowired
-    UserService userService;
+    private final UserService userService;
 
-    @Autowired
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
-    @Autowired
-    FacturationService facturationService;
+    private final FacturationService facturationService;
 
     private User user;
     private User payMyBuddy;
@@ -38,6 +34,13 @@ public class ProfileController {
 
     private float amountTransaction;
     float commissionRoundFloat;
+
+    public ProfileController(BankService bankService, UserService userService, TransactionService transactionService, FacturationService facturationService) {
+        this.bankService = bankService;
+        this.userService = userService;
+        this.transactionService = transactionService;
+        this.facturationService = facturationService;
+    }
 
 
     @GetMapping(value = "/profilePage")

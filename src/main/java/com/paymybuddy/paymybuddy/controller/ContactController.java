@@ -1,6 +1,5 @@
 package com.paymybuddy.paymybuddy.controller;
 
-import com.paymybuddy.paymybuddy.model.SecurityUser;
 import com.paymybuddy.paymybuddy.model.User;
 import com.paymybuddy.paymybuddy.service.UserService;
 import org.springframework.security.core.Authentication;
@@ -9,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
 
 @Controller
 public class ContactController {
@@ -42,7 +40,7 @@ public class ContactController {
     }
 
 
-    @PostMapping(value = "/addContact")
+    @GetMapping(value = "/addContact")
     public ModelAndView addContact(@RequestParam(value = "email") String email) {
 
         User newContact = userService.getUserByEmail(email).orElse(null);
