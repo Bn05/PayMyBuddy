@@ -26,22 +26,20 @@ Check that you have :
    ```sh
    cd paymybuddy
    ```
-4. Package the application (fat jar file)
-   ```sh
-   mvn clean package
-      ```
+4. Set environment variables "spring.datasource.url" -> jdbc:mysql://[YOUURLMysql]/paymybuddy?serverTimezone=UTC
+5. Set environment variables "spring.datasource.username" -> your mySQL username
+6. Set environment variables "spring.datasource.password" -> your mySql password
 
-5. Execute the jar file
+7. Execute
    ```sh
-   java -jar ./target/paymybuddy-0.0.1-SNAPSHOT.jar
+    mvn spring-boot:run
    ```
-6. To access the application, open your browser, go to [http://localhost:9000](http://localhost:9000)
+8. To access the application, open your browser, go to [http://localhost:9000](http://localhost:9000)
 
 ## Model Database (SQL)
 
 ![Model BDD](/img/diagrammeDataBase.png)
 
- 
 ### UML Diagram
 
 ![Diagram UML](/img/DiagrammeClassP6.png)
