@@ -7,7 +7,6 @@ import com.paymybuddy.paymybuddy.service.FacturationService;
 import com.paymybuddy.paymybuddy.service.TransactionService;
 import com.paymybuddy.paymybuddy.service.UserService;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.mockito.Mock;
@@ -21,7 +20,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
@@ -51,7 +52,7 @@ class ProfileControllerTest {
     @MockBean
     TransactionService transactionServiceMock;
 
-    @MockBean
+    @Mock
     FacturationService facturationServiceMock;
 
     User user1;
@@ -124,6 +125,13 @@ class ProfileControllerTest {
     void addMoneyToMyBankAccount() throws Exception {
 
         ReflectionTestUtils.setField(profileController, "user", user1);
+        Map<String,Double> resultMap = new HashMap<>();
+        resultMap.put("amountLessCommission", 95d);
+        resultMap.put("commissionRound", 5d);
+        resultMap.put("commissionPerCent", 5d);
+
+        when(facturationServiceMock.getCommission(anyInt())).thenReturn(resultMap);
+
 
         mockMvc.perform(post("/addMoneyToMyBankAccount").with(user(new SecurityUser(user1)))
                         .param("iban", "10")
