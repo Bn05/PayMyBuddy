@@ -148,6 +148,9 @@ public class ProfileController {
 
             Map<String, Double> resultMap = facturationService.getCommission(amountTransaction);
 
+            double commissionRoundDouble = resultMap.get("commissionRound");
+            commissionRoundFloat =(float) commissionRoundDouble;
+
             modelAndView.addObject("validationCommission", true);
             modelAndView.addObject("amountToBank", String.valueOf(amount));
             modelAndView.addObject("amountLessCommission", resultMap.get("amountLessCommission"));

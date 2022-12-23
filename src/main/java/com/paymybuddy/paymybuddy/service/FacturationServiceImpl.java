@@ -1,5 +1,6 @@
 package com.paymybuddy.paymybuddy.service;
 
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Map;
 import static java.lang.Math.round;
 
 @Service
+@Transactional
 public class FacturationServiceImpl implements FacturationService {
 
 @Override
