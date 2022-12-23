@@ -29,4 +29,20 @@ public class FacturationServiceImpl implements FacturationService {
 
         return resultMap;
     }
+
+    @Override
+    public Map<String, Double> addCommission(float amountTransaction) {
+        double commissionPerCent = 5.00;
+        double commission = amountTransaction * ((commissionPerCent) / 100);
+        double commissionRound = round(commission * 100.00) / 100.00;
+        double amountMoreCommission = amountTransaction + commissionRound;
+
+        Map<String, Double> resultMap = new HashMap<>();
+
+        resultMap.put("commissionPerCent", commissionPerCent);
+        resultMap.put("commissionRound", commissionRound);
+        resultMap.put("amountMoreCommission", amountMoreCommission);
+
+        return resultMap;
+    }
 }

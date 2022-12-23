@@ -69,6 +69,7 @@
                     <th> Date</th>
                     <th>Commentaire</th>
                     <th> Amount</th>
+                    <th> Commission</th>
                 </thead>
                 <tbody>
                 <tr th:each="transaction, iStat : ${transactionPage.content}"
@@ -79,6 +80,7 @@
                     <td th:text="${transaction.transactionDate}"/>
                     <td th:text="${transaction.comment}"/>
                     <td th:text="${transaction.amount}"/>
+                    <td th:text="${transaction.commission}"/>
                 </tr>
                 </tbody>
             </table>

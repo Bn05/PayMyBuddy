@@ -2,6 +2,7 @@ package com.paymybuddy.paymybuddy.controller;
 
 import com.paymybuddy.paymybuddy.model.Transaction;
 import com.paymybuddy.paymybuddy.model.User;
+import com.paymybuddy.paymybuddy.service.FacturationService;
 import com.paymybuddy.paymybuddy.service.TransactionService;
 import com.paymybuddy.paymybuddy.service.UserService;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -26,11 +28,12 @@ public class TransferPageController {
     TransactionService transactionService;
     private final UserService userService;
 
+    private final FacturationService facturationService;
 
-
-    public TransferPageController(TransactionService transactionService, UserService userService) {
+    public TransferPageController(TransactionService transactionService, UserService userService, FacturationService facturationService) {
         this.transactionService = transactionService;
         this.userService = userService;
+        this.facturationService = facturationService;
     }
 
     @GetMapping(value = "/transferPage")
@@ -54,7 +57,7 @@ public class TransferPageController {
         int currentPage = page.orElse(1);
         int pageSize = size.orElse(3);
 
-        Page<Transaction> transactionPage = transactionService.findTransactionPage(user,PageRequest.of(currentPage - 1, pageSize));
+        Page<Transaction> transactionPage = transactionService.findTransactionPage(user, PageRequest.of(currentPage - 1, pageSize));
 
         model.addAttribute("transactionPage", transactionPage);
 
@@ -80,6 +83,13 @@ public class TransferPageController {
 
         User receivingUser = userService.getUser(receivingUserId);
 
+        Map<String, Double> resultMap = facturationService.addCommission(amount);
+        double commissionDouble = resultMap.get("commissionRound");
+        float commissionFloat = (float) commissionDouble;
+
+        double amountMoreCommissionDouble = resultMap.get("amountMoreCommission");
+        float amountMoreCommissionFloat = (float) amountMoreCommissionDouble;
+
         Transaction transactionRequest = new Transaction();
 
         transactionRequest.setSenderUser(senderUser);
@@ -87,17 +97,22 @@ public class TransferPageController {
         transactionRequest.setTransactionDate(LocalDate.now());
         transactionRequest.setComment(comment);
         transactionRequest.setAmount(amount);
+        transactionRequest.setCommission(commissionFloat);
 
         float senderWallet = senderUser.getWallet();
         float amountTransaction = transactionRequest.getAmount();
 
-        if (senderWallet >= amountTransaction) {
+        if (senderWallet >= amountMoreCommissionFloat) {
 
-            senderUser.setWallet(senderWallet - amountTransaction);
+            senderUser.setWallet(senderWallet - amountMoreCommissionFloat);
             receivingUser.setWallet(receivingUser.getWallet() + amountTransaction);
+
+            User payMyBuddy = userService.getUser(1);
+            payMyBuddy.setWallet(payMyBuddy.getWallet()+commissionFloat);
 
             userService.updateUser(senderUser);
             userService.updateUser(receivingUser);
+            userService.updateUser(payMyBuddy);
 
             transactionService.addTransaction(transactionRequest);
         } else {

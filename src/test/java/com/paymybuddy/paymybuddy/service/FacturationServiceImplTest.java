@@ -37,4 +37,16 @@ class FacturationServiceImplTest {
         assertEquals(12.35, resultMap.get("amountLessCommission"));
 
     }
+
+    @Test
+    void addCommission(){
+
+        float amount = 100;
+
+        Map<String, Double> resultMap = facturationService.addCommission(amount);
+
+        assertEquals(5.0, resultMap.get("commissionPerCent"));
+        assertEquals(5.0, resultMap.get("commissionRound"));
+        assertEquals(105.0, resultMap.get("amountMoreCommission"));
+    }
 }

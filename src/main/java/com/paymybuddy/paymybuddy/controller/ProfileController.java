@@ -35,6 +35,7 @@ public class ProfileController {
     private float amountTransaction;
     float commissionRoundFloat;
 
+
     public ProfileController(BankService bankService, UserService userService, TransactionService transactionService, FacturationService facturationService) {
         this.bankService = bankService;
         this.userService = userService;
@@ -122,10 +123,19 @@ public class ProfileController {
 
         if (bankService.bankValidation(bankCardId, bankCardSecurity, bankCardUserName, amount)) {
 
-            user.setWallet(user.getWallet() + amount);
+            Map<String, Double> resultMap = facturationService.getCommission(amount);
+
+
+            user.setWallet((float) (user.getWallet() + resultMap.get("amountLessCommission")));
             userService.updateUser(user);
 
-            Transaction transaction = new Transaction(yourBank, user, LocalDate.now(), "From Your Bank", amount);
+            double commissionDouble = resultMap.get("commissionRound");
+            float commissionFloat = (float) commissionDouble;
+
+            payMyBuddy.setWallet(payMyBuddy.getWallet() + commissionFloat);
+            userService.updateUser(payMyBuddy);
+
+            Transaction transaction = new Transaction(yourBank, user, LocalDate.now(), "From Your Bank", amount, commissionFloat);
             transactionService.addTransaction(transaction);
 
             modelAndView.addObject("validationFromBank", true);
@@ -149,7 +159,7 @@ public class ProfileController {
             Map<String, Double> resultMap = facturationService.getCommission(amountTransaction);
 
             double commissionRoundDouble = resultMap.get("commissionRound");
-            commissionRoundFloat =(float) commissionRoundDouble;
+            commissionRoundFloat = (float) commissionRoundDouble;
 
             modelAndView.addObject("validationCommission", true);
             modelAndView.addObject("amountToBank", String.valueOf(amount));
@@ -172,7 +182,7 @@ public class ProfileController {
         payMyBuddy.setWallet(payMyBuddy.getWallet() + commissionRoundFloat);
         userService.updateUser(payMyBuddy);
 
-        Transaction transaction = new Transaction(user, yourBank, LocalDate.now(), "To Your Bank", amountTransaction);
+        Transaction transaction = new Transaction(user, yourBank, LocalDate.now(), "To Your Bank", amountTransaction, commissionRoundFloat);
         transactionService.addTransaction(transaction);
 
 

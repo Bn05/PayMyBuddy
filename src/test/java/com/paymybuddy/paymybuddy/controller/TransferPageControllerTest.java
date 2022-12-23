@@ -57,7 +57,7 @@ public class TransferPageControllerTest {
         user2 = new User("firstName2", "lastName2", LocalDate.of(2022, 12, 20), "na2@na2.fr", "Toulouse2", 150f, "password2", contacts);
         contacts.add(user2);
         user1.setContacts(contacts);
-        transaction1 = new Transaction(user1, user2, LocalDate.of(2022, 12, 20), "comtest", 15.0f);
+        transaction1 = new Transaction(user1, user2, LocalDate.of(2022, 12, 20), "comtest", 15.0f, 2f);
         List<Transaction> transactions = new ArrayList<>();
         transactions.add(transaction1);
 

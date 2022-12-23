@@ -20,12 +20,13 @@ CREATE TABLE user
 
 CREATE TABLE transaction
 (
-    transaction_id      INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    sender_user_id      INTEGER      NOT NULL,
-    receiving_user_id   INTEGER      NOT NULL,
-    transaction_date    DATE         NOT NULL,
-    transaction_comment VARCHAR(255) NOT NULL,
-    transaction_amount  FLOAT        NOT NULL,
+    transaction_id         INTEGER      NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    sender_user_id         INTEGER      NOT NULL,
+    receiving_user_id      INTEGER      NOT NULL,
+    transaction_date       DATE         NOT NULL,
+    transaction_comment    VARCHAR(255) NOT NULL,
+    transaction_amount     FLOAT        NOT NULL,
+    transaction_commission FLOAT,
     FOREIGN KEY (sender_user_id) REFERENCES user (user_Id),
     FOREIGN KEY (receiving_user_id) REFERENCES user (user_Id)
 );
@@ -69,10 +70,11 @@ INSERT INTO user (firstName, lastName, birthdate, email, address, wallet, passwo
      '$2y$10$syavJCs0C7s.EVlCnBjWxuRwxBTC4Yj8FFUDnfQekcOoMgvMcdbnS')
 ;
 
-INSERT INTO transaction(sender_user_id, receiving_user_id, transaction_date, transaction_comment, transaction_amount)
-    VALUE (3, 4, '2022-01-01', 'Ciné', 25),
-    (3, 5, '2022-02-05', 'Restaurant', 50),
-    (5, 3, '2022-12-04', 'Covoit', 75)
+INSERT INTO transaction(sender_user_id, receiving_user_id, transaction_date, transaction_comment, transaction_amount,
+                        transaction_commission)
+    VALUE (3, 4, '2022-01-01', 'Ciné', 25,1.25),
+    (3, 5, '2022-02-05', 'Restaurant', 50,2.5),
+    (5, 3, '2022-12-04', 'Covoit', 75,3.75)
 ;
 
 INSERT INTO user_user (main_user_id, contact_user_id)

@@ -9,5 +9,7 @@ public interface FacturationService {
 
     public Map<String, Double> getCommission(float amountTransaction);
 
+    public Map<String, Double> addCommission(float amountTransaction);
+
 
 }

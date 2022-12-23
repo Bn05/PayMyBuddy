@@ -33,16 +33,20 @@ public class Transaction {
     @Column(name = "transaction_amount")
     private float amount;
 
+    @Column(name = "transaction_commission")
+    private float commission;
+
     public Transaction() {
 
     }
 
-    public Transaction(User senderUser, User receivingUser, LocalDate transactionDate, String comment, float amount) {
+    public Transaction(User senderUser, User receivingUser, LocalDate transactionDate, String comment, float amount, float commission) {
         this.senderUser = senderUser;
         this.receivingUser = receivingUser;
         this.transactionDate = transactionDate;
         this.comment = comment;
         this.amount = amount;
+        this.commission = commission;
     }
 
     public int getTransactionId() {
@@ -91,6 +95,14 @@ public class Transaction {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public float getCommission() {
+        return commission;
+    }
+
+    public void setCommission(float commission) {
+        this.commission = commission;
     }
 
 }
